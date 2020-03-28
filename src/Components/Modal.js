@@ -1,14 +1,14 @@
 import React from 'react'
 
 
- const Main = () =>{
+ const Modal = () =>{
     return (
         <div>
-
+         <h1>Modal</h1>
         </div>
     )
 
 }
 
-export default Main;
+export default Modal;
 

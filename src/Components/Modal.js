@@ -1,10 +1,10 @@
 import React from 'react';
-
+import FocusTrap from 'focus-trap-react';
 import ReactDOM from 'react-dom';
 import "./styles/Modal.scss";
 
 
-const Modal = ({onClose}) => {
+const Modal = ({onClose, showModal}) => {
 
     
     const restart =()=>{
@@ -13,6 +13,7 @@ const Modal = ({onClose}) => {
     }
 
 	return ReactDOM.createPortal(
+        <FocusTrap active={showModal} >
 		<div className="modal">
 			{/*same className for the modalContainer here and Create.js, same button classNames as well */}
 			<div className="modal__box">
@@ -37,9 +38,13 @@ const Modal = ({onClose}) => {
 					</button>
 				</div>
 			</div>
-		</div>,
+		</div>
+        </FocusTrap>
+        ,
 		document.body
+      
 	);
+  
 };
 
 export default Modal;

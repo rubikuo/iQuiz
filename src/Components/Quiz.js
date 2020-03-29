@@ -253,7 +253,7 @@ const Quiz = ({ location }) => {
 				</div> }
         </>}
         {currentPage === lastPage && <button onClick={showResult}>Result</button>}
-         <Modal  />
+        {showModal && <Modal showModal={showModal} onClose={()=>setShowModal(false)}/>}
 			</div>
 		</div>
 	);

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Main from "./Components/Main";
 import About from "./Components/About";
 import Stats from "./Components/Stats";
+import Quiz from "./Components/Quiz";
 import {Container} from "react-bootstrap";
 import Header from "./Components/Header";
 import SidebarNav from './Components/SidebarNav';
@@ -26,7 +27,8 @@ function App() {
       <Router>
   
         <Switch>
-          <Route exact path="/" component={Main}/>
+          <Route exact path="/" component={Main} isOpen={isOpen}/>
+          <Route path="/quiz" component={Quiz} />
           <Route path="/about" component={About}/>
           <Route path="/stats" component={Stats}/>
         </Switch>

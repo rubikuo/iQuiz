@@ -1,8 +1,7 @@
 import React from 'react';
-import PropsTypes from "prop-types";
+import PropsTypes from 'prop-types';
 
-export const BookIcon = ({size, className}) => {
-
+export const BookIcon = ({ size, className }) => {
 	return (
 		<svg
 			id="book"
@@ -13,7 +12,7 @@ export const BookIcon = ({size, className}) => {
 			viewBox="0 0 222 223"
 			className={className}
 		>
-			<g id="Ellipse_1" data-name="Ellipse 1" fill="#8aa9c3" stroke="#707070" stroke-width="5">
+			<g id="Ellipse_1" data-name="Ellipse 1" fill="#8aa9c3" stroke="#707070" strokeWidth="5">
 				<ellipse cx="111" cy="111.5" rx="111" ry="111.5" stroke="none" />
 				<ellipse cx="111" cy="111.5" rx="108.5" ry="109" fill="none" />
 			</g>
@@ -93,19 +92,17 @@ export const BookIcon = ({size, className}) => {
 	);
 };
 
-
-BookIcon.propsTypes= {
+BookIcon.propsTypes = {
 	size: PropsTypes.number,
-	className: PropsTypes.string,
-}
+	className: PropsTypes.string
+};
 
-BookIcon.defaultProps ={
+BookIcon.defaultProps = {
 	size: 230,
-	className: "book-icon"
-}
+	className: 'book-icon'
+};
 
-
-export const MusicIcon = ({size, className}) => {
+export const MusicIcon = ({ size, className }) => {
 	return (
 		<svg
 			id="music"
@@ -115,7 +112,6 @@ export const MusicIcon = ({size, className}) => {
 			height={size}
 			viewBox="0 0 226.453 226.453"
 			className={className}
-		
 		>
 			<g id="Path_21" data-name="Path 21" fill="#d999db">
 				<path
@@ -167,18 +163,17 @@ export const MusicIcon = ({size, className}) => {
 	);
 };
 
-MusicIcon.propsTypes= {
+MusicIcon.propsTypes = {
 	size: PropsTypes.number,
-	className: PropsTypes.string,
-}
+	className: PropsTypes.string
+};
 
-MusicIcon.defaultProps ={
+MusicIcon.defaultProps = {
 	size: 230,
-	className: "music-icon"
-}
+	className: 'music-icon'
+};
 
-
-export const GameIcon = ({size, className}) => {
+export const GameIcon = ({ size, className }) => {
 	return (
 		<svg
 			id="game"
@@ -366,16 +361,16 @@ export const GameIcon = ({size, className}) => {
 	);
 };
 
-GameIcon.propsTypes= {
+GameIcon.propsTypes = {
 	size: PropsTypes.number,
-	className: PropsTypes.string,
-}
-GameIcon.defaultProps ={
+	className: PropsTypes.string
+};
+GameIcon.defaultProps = {
 	size: 230,
-	className:"game-icon"
-}
+	className: 'game-icon'
+};
 
-export const MovieIcon = ({size, className}) => {
+export const MovieIcon = ({ size, className }) => {
 	return (
 		<svg
 			id="movie"
@@ -397,127 +392,129 @@ export const MovieIcon = ({size, className}) => {
 					fill="#707070"
 				/>
 			</g>
-			<path
-				id="Path_2"
-				data-name="Path 2"
-				d="M127.5,270v56.527a3.737,3.737,0,0,1-3.735,3.735H3.737A3.737,3.737,0,0,1,0,326.531V270Z"
-				transform="translate(51.454 -161.344)"
-				fill="#474f54"
-			/>
-			<path
-				id="Path_3"
-				data-name="Path 3"
-				d="M319.751,270v56.527a3.737,3.737,0,0,1-3.735,3.735H256V270Z"
-				transform="translate(-140.797 -161.344)"
-				fill="#32393f"
-			/>
-			<path
-				id="Path_4"
-				data-name="Path 4"
-				d="M216.627,327.373l-7.876-1.143-3.521-7.137a3.737,3.737,0,0,0-6.7,0l-3.521,7.137-7.877,1.143a3.738,3.738,0,0,0-2.069,6.372l5.7,5.556-1.345,7.842a3.738,3.738,0,0,0,5.419,3.939l7.045-3.7,7.045,3.7a3.739,3.739,0,0,0,5.419-3.939L213,339.3l5.7-5.556A3.739,3.739,0,0,0,216.627,327.373Z"
-				transform="translate(-86.675 -203.883)"
-				fill="#fed843"
-			/>
-			<path
-				id="Path_5"
-				data-name="Path 5"
-				d="M272.818,333.746l-5.7,5.556,1.345,7.842a3.739,3.739,0,0,1-5.419,3.939l-7.045-3.7V317.014a3.694,3.694,0,0,1,3.349,2.079l3.521,7.137,7.876,1.143A3.739,3.739,0,0,1,272.818,333.746Z"
-				transform="translate(-140.797 -203.883)"
-				fill="#ffb64c"
-			/>
-			<path
-				id="Path_6"
-				data-name="Path 6"
-				d="M265.641,16.92,254.287,30.43l-4.209,14.1L278.861,36.5l11.028-13.29,4.535-14.322Z"
-				transform="translate(-136.349 27.513)"
-				fill="#32393f"
-			/>
-			<g id="Group_1" data-name="Group 1" transform="translate(55.191 53.47)">
-				<path
-					id="Path_7"
-					data-name="Path 7"
-					d="M15,89.074v23.268l28.3-7.9,2.472-3.655,8.521-12.6,2.426-10.76Z"
-					transform="translate(-15.002 -77.431)"
-					fill="#474f54"
-				/>
+			<g id="Group_70" data-name="Group 70" transform="translate(-965.428 -245.318)">
+				<g id="Group_69" data-name="Group 69" transform="translate(1022.26 288.264)">
+					<g id="clapperboard" transform="translate(0 0)">
+						<path
+							id="Path_135"
+							data-name="Path 135"
+							d="M115.8,270v55.368a3.534,3.534,0,0,1-3.393,3.659H3.395A3.534,3.534,0,0,1,0,325.372V270Z"
+							transform="translate(-0.002 -204.147)"
+							fill="#474f54"
+						/>
+						<path
+							id="Path_136"
+							data-name="Path 136"
+							d="M313.9,270v55.368a3.534,3.534,0,0,1-3.393,3.659H256V270Z"
+							transform="translate(-198.103 -204.147)"
+							fill="#32393f"
+						/>
+						<path
+							id="Path_137"
+							data-name="Path 137"
+							d="M213.627,327.161l-7.154-1.12-3.2-6.99a3.29,3.29,0,0,0-6.084,0l-3.2,6.99-7.154,1.12c-2.78.437-3.89,4.129-1.879,6.242l5.175,5.442-1.221,7.681c-.475,2.985,2.438,5.266,4.921,3.859l6.4-3.627,6.4,3.627c2.472,1.4,5.4-.863,4.921-3.859l-1.221-7.681,5.175-5.442C217.517,331.288,216.4,327.6,213.627,327.161Z"
+							transform="translate(-142.334 -239.691)"
+							fill="#fed843"
+						/>
+						<path
+							id="Path_138"
+							data-name="Path 138"
+							d="M271.275,333.4l-5.175,5.442,1.221,7.681c.477,3-2.449,5.259-4.921,3.859l-6.4-3.627V317.014a3.337,3.337,0,0,1,3.042,2.037l3.2,6.99,7.154,1.12C272.173,327.6,273.286,331.288,271.275,333.4Z"
+							transform="translate(-198.103 -239.691)"
+							fill="#ffb64c"
+						/>
+						<path
+							id="Path_139"
+							data-name="Path 139"
+							d="M264.213,16.756,253.9,29.988,250.078,43.8l26.142-7.867,10.016-13.017,4.119-14.028Z"
+							transform="translate(-193.518 -6.72)"
+							fill="#32393f"
+						/>
+						<g id="Group_68" data-name="Group 68" transform="translate(3.393 18.886)">
+							<path
+								id="Path_140"
+								data-name="Path 140"
+								d="M15,88.835v22.791l25.7-7.736,2.245-3.58L50.691,87.97l2.2-10.539Z"
+								transform="translate(-15.002 -77.431)"
+								fill="#474f54"
+							/>
+						</g>
+						<path
+							id="Path_141"
+							data-name="Path 141"
+							d="M134.181,49.995,120.046,77.039l29.409-8.851L163.59,41.144Z"
+							transform="translate(-92.896 -31.109)"
+							fill="#efe2dd"
+						/>
+						<path
+							id="Path_142"
+							data-name="Path 142"
+							d="M225.886,47.044l5.472,21.144,14.135-27.045Z"
+							transform="translate(-174.798 -31.109)"
+							fill="#e1d3ce"
+						/>
+						<path
+							id="Path_143"
+							data-name="Path 143"
+							d="M390.73,2.676A3.369,3.369,0,0,0,386.55.136L379.8,2.168,365.662,29.213l26.359-7.933a3.7,3.7,0,0,0,2.356-4.507Z"
+							transform="translate(-282.961 0)"
+							fill="#e1d3ce"
+						/>
+						<path
+							id="Path_144"
+							data-name="Path 144"
+							d="M45.5,180l4.379,5.7,17.773,13.457,10.53-9.642L82.932,180Z"
+							transform="translate(-35.21 -136.099)"
+							fill="#575f64"
+						/>
+						<path
+							id="Path_145"
+							data-name="Path 145"
+							d="M276.357,180l-13.231,9.756L256,201.956h27.14l12.892-9.634L303.5,180Z"
+							transform="translate(-198.103 -136.099)"
+							fill="#474f54"
+						/>
+						<path
+							id="Path_146"
+							data-name="Path 146"
+							d="M141.357,180,121,201.956h30.533L171.89,180Z"
+							transform="translate(-93.635 -136.099)"
+							fill="#fff5f5"
+						/>
+						<path
+							id="Path_147"
+							data-name="Path 147"
+							d="M256,180v21.952L276.357,180Z"
+							transform="translate(-198.103 -136.099)"
+							fill="#efe2dd"
+						/>
+						<path
+							id="Path_148"
+							data-name="Path 148"
+							d="M406.761,183.663A3.533,3.533,0,0,0,403.369,180h-7.011L376,201.956h30.759Z"
+							transform="translate(-290.962 -136.099)"
+							fill="#efe2dd"
+						/>
+						<path
+							id="Path_149"
+							data-name="Path 149"
+							d="M5.717,125.1C3.591,122.946,0,124.475,0,127.852V159.69H39.4Z"
+							transform="translate(-0.002 -93.833)"
+							fill="#32393f"
+						/>
+					</g>
+				</g>
 			</g>
-			<path
-				id="Path_8"
-				data-name="Path 8"
-				d="M135.609,50.18,120.046,77.791l32.381-9.036,15.563-27.611Z"
-				transform="translate(-38.697 3.29)"
-				fill="#b1aead"
-			/>
-			<path
-				id="Path_9"
-				data-name="Path 9"
-				d="M225.886,47.168l6.024,21.587,15.563-27.611Z"
-				transform="translate(-118.181 3.29)"
-				fill="#b1aead"
-			/>
-			<path
-				id="Path_10"
-				data-name="Path 10"
-				d="M393.262,2.732a3.735,3.735,0,0,0-4.6-2.594l-7.435,2.075L365.662,29.825l29.022-8.1a3.735,3.735,0,0,0,2.594-4.6Z"
-				transform="translate(-223.15 34.188)"
-				fill="#b1aead"
-			/>
-			<path
-				id="Path_11"
-				data-name="Path 11"
-				d="M45.5,180l4.822,5.817L69.89,199.56l11.593-9.844L86.713,180Z"
-				transform="translate(17.286 -100.991)"
-				fill="#575f64"
-			/>
-			<path
-				id="Path_12"
-				data-name="Path 12"
-				d="M278.414,180l-14.568,9.961L256,202.416h29.882l14.194-9.836L308.3,180Z"
-				transform="translate(-140.797 -100.991)"
-				fill="#474f54"
-			/>
-			<path
-				id="Path_13"
-				data-name="Path 13"
-				d="M143.414,180,121,202.416H154.62L177.031,180Z"
-				transform="translate(-39.415 -100.991)"
-				fill="#b1aead"
-				stroke="#b1aead"
-				stroke-width="1"
-			/>
-			<path
-				id="Path_14"
-				data-name="Path 14"
-				d="M256,180v22.412L278.414,180Z"
-				transform="translate(-140.797 -100.991)"
-				fill="#b1aead"
-				stroke="#b1aead"
-				stroke-width="1"
-			/>
-			<path
-				id="Path_15"
-				data-name="Path 15"
-				d="M409.869,183.739A3.735,3.735,0,0,0,406.133,180h-7.72L376,202.416h33.867Z"
-				transform="translate(-230.915 -100.991)"
-				fill="#b1aead"
-			/>
-			<path
-				id="Path_16"
-				data-name="Path 16"
-				d="M6.295,125.119A3.737,3.737,0,0,0,0,127.931v32.5H43.381Z"
-				transform="translate(51.454 -59.011)"
-				fill="#32393f"
-			/>
 		</svg>
 	);
 };
 
-MovieIcon.propsTypes= {
+MovieIcon.propsTypes = {
 	size: PropsTypes.number,
-	className: PropsTypes.string,
-}
+	className: PropsTypes.string
+};
 
-MovieIcon.defaultProps ={
+MovieIcon.defaultProps = {
 	size: 230,
-	className: "movie-icon"
-}
+	className: 'movie-icon'
+};

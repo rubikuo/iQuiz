@@ -1,12 +1,17 @@
-%flexCCC {
+%flexJC {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
+}
+
+
+%flexCCC {
+	@extend %flexJC;
+	flex-direction: column;
 	align-items: center;
 }
 
 %flexRCC {
-	display: flex;
-	justify-content: center;
+	@extend %flexJC;
 	align-items: center;
 }
+

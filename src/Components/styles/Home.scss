@@ -1,0 +1,32 @@
+@import "./variables";
+
+.home {
+	color: white;
+	@extend %flexCCC;
+
+	&__card-group {
+		padding: 20px;
+		width: 100%;
+		@extend %flexRCC;
+		flex-wrap: wrap;
+		flex-grow: 1;
+	}
+	&__card {
+		margin: 20px;
+		width: 220px;
+		@extend %flexCCC;
+		&-head {
+			width: 100%;
+			@extend %flexRCC;
+		}
+		&-img {
+			-webkit-filter: drop-shadow(0px 0px 3px rgb(255, 247, 0));
+			filter: drop-shadow(0px 0px 3px rgb(255, 247, 0));
+		}
+
+		&-title {
+			width: 100%;
+			text-align: center;
+		}
+	}
+}

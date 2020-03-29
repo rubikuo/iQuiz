@@ -1,14 +1,45 @@
-import React from 'react'
+import React from 'react';
+
+import ReactDOM from 'react-dom';
+import "./styles/Modal.scss";
 
 
- const Modal = () =>{
-    return (
-        <div>
-         <h1>Modal</h1>
-        </div>
-    )
+const Modal = ({onClose}) => {
 
-}
+    
+    const restart =()=>{
+        //clearLocalStorage , return to home
+
+    }
+
+	return ReactDOM.createPortal(
+		<div className="modal">
+			{/*same className for the modalContainer here and Create.js, same button classNames as well */}
+			<div className="modal__box">
+				<div className="modal__headline">
+					
+					<h5> Congratulations !</h5>
+				</div>
+
+				<p>
+					Your have 10/10 questions correct!
+				</p>
+
+				<div className="modal__button-ctn">
+					<button
+						onClick={restart}
+						className="modal__button modal__buttons--blue"
+					>
+						Delete
+					</button>
+					<button onClick={onClose} className="modal__button">
+						Cancel
+					</button>
+				</div>
+			</div>
+		</div>,
+		document.body
+	);
+};
 
 export default Modal;
-

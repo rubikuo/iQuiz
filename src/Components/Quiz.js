@@ -3,25 +3,52 @@ import axios from 'axios';
 // import Pagination from './Pagination';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 // import FocusTrap from 'focus-trap-react';
+import {Redirect} from "react-router-dom";
 import './styles/Quiz.scss';
-import {playTimes$, updatePlayTimes} from "../store.js";
+import Modal from "./Modal"
+import {playTimes$, updatePlayTimes, correctNum$, updateCorrectNum, inCorrectNum$, updateInCorrectNum, correctPercent$, updateCorrectPercent, userAnswers$, updateUserAnswers} from "./store.js";
 
 const Quiz = ({ location }) => {
 	const [ datas, setDatas ] = useState([]);
 	const [ loading, setLoading ] = useState(true);
 	const [ currentPage, setCurrentPage ] = useState(1);
 	const [ dataPerPage, setDataPerpage ] = useState(1);
-	const [ checked, setChecked ] = useState('');
+  const [ checkedValue, setCheckedValue ] = useState('');
+  const [isChecked, setIsChecked] =useState(false);
+  const [ correctAnswers, setCorrectAnswers] = useState([]);
   const [ point, setPoint ] = useState(0);
-  const  [playTimes, setPlayTimes] = useState(playTimes$.value);
+  const [playTimes, setPlayTimes] = useState(playTimes$.value);
+  const [correctNum, setCorrectNum] = useState(correctNum$.value);
+  const [inCorrectNum, setinCorrectNum] = useState(inCorrectNum$.value);
+  const [correctPercent, setCorrectPercent] = useState(correctPercent$.value);
+  const [userAnswers, setUserAnswers] = useState(userAnswers$.value);
+  const [redirect, setRedirect] = useState(false);
+  const [showModal, setShowModal] = useState(false)
+  
 
  
+  //connect to localstorage once it's loaded
   useEffect(() => {
-    const subscribe = playTimes$.subscribe(times => {
-        updatePlayTimes(times);
-    })
+    const subscriptions = [
+      playTimes$.subscribe(times => {
+        setPlayTimes(times);
+    }),
+      correctNum$.subscribe(num =>{
+        setCorrectNum(num);
+      }),
+      inCorrectNum$.subscribe(num =>{
+        setinCorrectNum(num);
+      }),
+      correctPercent$.subscribe(num =>{
+        setCorrectPercent(num);
+      }),
+      userAnswers$.subscribe(answers =>{
+        setUserAnswers(answers)
+      })
+    ]
+       
 
-    return () => subscribe.unsubscribe();
+    return () => subscriptions.forEach(x =>x.unsubscribe());
 }, []);
 
 
@@ -29,9 +56,6 @@ const Quiz = ({ location }) => {
 
 	let catagory = location.state.catagory;
 
-	useEffect(() => {
-		getData();
-	}, []);
 
 	let url = `https://opentdb.com/api.php?amount=10&category=${catagory}&difficulty=medium&type=multiple`;
 
@@ -47,9 +71,11 @@ const Quiz = ({ location }) => {
 				})
 				.then((datas) => {
 					let copyDatas = [ ...datas ];
-					let reEditedDatas = [];
+          let reEditedDatas = [];
+          let allCorrectAnswers = [];
 					copyDatas.map((data) => {
-						let allAnswers = [ ...data.incorrect_answers, data.correct_answer ];
+            let allAnswers = [ ...data.incorrect_answers, data.correct_answer ];
+            allCorrectAnswers.push(data.correct_answer)
 						console.log(allAnswers);
 						let shuffledArr = shuffle(allAnswers);
 						let newDatas = {
@@ -57,17 +83,21 @@ const Quiz = ({ location }) => {
 							...data
 						};
 						return reEditedDatas.push(newDatas);
-					});
+          });
+          
+          setCorrectAnswers(allCorrectAnswers)
 					setDatas(reEditedDatas);
-				});
+				}).catch((err)=>{
+          console.log(err)
+        })
 		},
 		[ url ]
-	);
-	// console.log(datas);
+  );
+  
+	useEffect(() => {
+		getData();
+	}, [getData]);
 
-	// const paginate = (pageNum) => {
-	// 	setCurrentPage(pageNum);
-	// };
 
 	const shuffle = (array) => {
 		let shuffled = [];
@@ -85,11 +115,78 @@ const Quiz = ({ location }) => {
 	// console.log("indexLastData", indexOfLastData);
 	const indexOfFirstData = indexOfLastData - dataPerPage;
 	// console.log("indexFirstData", indexOfFirstData);
-	const currentDatas = datas.slice(indexOfFirstData, indexOfLastData);
+  const currentDatas = datas.slice(indexOfFirstData, indexOfLastData);
+  
+  const lastPage = Math.ceil(datas.length / dataPerPage);
 
 	const handleRadioBtn = (e) => {
-		setChecked(e.target.value);
-	};
+    setCheckedValue(e.target.value);
+    setIsChecked(true)
+  };
+
+  const toNext = () =>{
+    console.log("hi")
+    if(isChecked ){
+      setIsChecked(false);
+      // let copyUserAnswers=[...userAnswers];
+      let eachAnswer ={
+        answer:checkedValue,
+        id:currentPage
+      }
+      updateUserAnswers(eachAnswer);
+      setIsChecked(true);
+      console.log(userAnswers$.value)
+   
+      // setUserAnswers(copyUserAnswers)
+
+      setCurrentPage(currentPage+1)
+
+    }
+   
+  }
+  console.log(showModal)
+  ////demo for myself to see how to update the useranswers
+  // let currentNum= 1;
+  // let value = "ok";
+
+  // let array = [{id:1, an:"hello"}, {id:2, an:"hi"}];
+  //  let copyarr = [...array];
+  // let result= copyarr.findIndex((x)=>x.id=== currentNum&& x.an!==value)
+  
+
+  // console.log(result)
+  // array[result].an=value;
+  // console.log(copyarr)
+
+  const toPrev = () =>{
+    console.log("hello")
+      if(!isChecked){
+        setIsChecked(true)
+        
+      }else{
+        setIsChecked(false)
+      }
+  
+      setCurrentPage(currentPage-1)
+    
+  }
+  
+
+  const showResult = () =>{
+	console.log("hi")
+    setShowModal(true)
+
+  } 
+  // if(redirect){
+	// 	return <Redirect to={{
+  //           pathname: '/stats'
+  //       }}/>
+  // }
+  
+
+
+
+  // console.log(correctAnswers)
 
 	return (
 		<div className="quiz">
@@ -126,7 +223,7 @@ const Quiz = ({ location }) => {
 												id={opt}
 												value={opt}
 												onChange={handleRadioBtn}
-												checked={checked === opt}
+												checked={checkedValue === opt}
 											/>
 											<span className="quiz__radiobtn--fake" />
 											<span className="quiz__radiobtn-option">
@@ -144,15 +241,19 @@ const Quiz = ({ location }) => {
 				{/* </FocusTrap> */}
         {loading? null:
         <>
-         <div className="quiz__button-ctn quiz__button-ctn--left">
+        { currentPage === 1? null:
+         <div onClick={toPrev}  className="quiz__button-ctn quiz__button-ctn--left">
 					<button className="quiz__button quiz__button-prev" />
 					<MdNavigateBefore className="quiz__button-prev--fake" />
-				</div>
-				<div className="quiz__button-ctn quiz__button-ctn--right">
-					<button className="quiz__button quiz__button-next" />
-					<MdNavigateNext className="quiz__button-next--fake" />  
-				</div> 
+				</div> }
+         { currentPage === lastPage? null:
+	        <div onClick={toNext} className="quiz__button-ctn quiz__button-ctn--right">
+					<button  className="quiz__button quiz__button-next" />
+					<MdNavigateNext  className="quiz__button-next--fake" />  
+				</div> }
         </>}
+        {currentPage === lastPage && <button onClick={showResult}>Result</button>}
+         <Modal  />
 			</div>
 		</div>
 	);

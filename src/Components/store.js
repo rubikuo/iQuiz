@@ -1,6 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 
 
+// save how many games 
 export const playTimes$ = new BehaviorSubject(localStorage.getItem('times') || 0);
 
 export function updatePlayTimes(time) {
@@ -12,7 +13,6 @@ export function updatePlayTimes(time) {
 	playTimes$.next(time);
 }
 
-// save how many games 
 
 // save how many correct 
 export const correctNum$ = new BehaviorSubject(localStorage.getItem('correctNum') || 0);
@@ -50,3 +50,34 @@ export function updateCorrectPercent(num) {
 	} 
 	correctPercent$.next(num);
 }
+
+// to save user's answers 
+export const userAnswers$ = new BehaviorSubject(JSON.parse(localStorage.getItem('userAnswers') || '[]'));
+
+export function updateUserAnswers(answerObj) {
+    const newUserAnswers = [ ...userAnswers$.value ]; // to copy the array from localstorage
+
+	if (newUserAnswers.find((x) => x.id === answerObj.id)) {
+		// check if its in the array
+        let index= newUserAnswers.findIndex((x) => x.id === answerObj.id);
+        newUserAnswers[index].answer = answerObj.answer; 
+
+		localStorage.setItem('userAnswers', JSON.stringify(newUserAnswers));
+		userAnswers$.next(newUserAnswers); // update localstorage
+	} else {
+		newUserAnswers.push(answerObj); // if there is not then push answerObj({id: page , answer:check})
+		localStorage.setItem('userAnswers', JSON.stringify(newUserAnswers));
+		userAnswers$.next(newUserAnswers);
+	}
+}
+
+// export function removeFavoriteByPath(path) {
+// 	const newFavorites = favorites$.value.filter(x => x.path_lower !== path);
+// 	localStorage.setItem('favorites', JSON.stringify(newFavorites));
+// 	favorites$.next(newFavorites);
+// }
+
+// export function clearFavorites() {
+// 	favorites$.next([]);
+// 	localStorage.removeItem("favorites");
+// }

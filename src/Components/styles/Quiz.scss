@@ -2,6 +2,7 @@
 
 .quiz {
 	color: white;
+
 	&__title {
 	}
 	&__container {
@@ -9,63 +10,45 @@
 		@extend %flexCCC;
 		position: relative;
 	}
-	&__button-ctn {
-		position: absolute;
-        top: 50%;
-        background-color: transparent;
-        @extend %flexRCC;
-        
-		&--left {
-			left: 30px;
-        }
-        &--right {
-            right: 30px;
-        }
-	}
 	&__button {
-		// position: relative;
-		border: 0;
+		position: absolute;
+		top: 50%;
+		background-color: transparent;
+		border: none;
 		padding: 0;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		// opacity: 0;
-        background-color: transparent;
-		&-prev {
-            background-color: transparent;
-            // opacity: 0;
-            overflow: hidden;
-			&--fake {
-				font-size: 50px;
-				color: red;
-				position: absolute;
-				top: 50%;
-				left: 50%;
-                transform: translate(-50%, -50%);
-                background-color: transparent;
-			}
-		}
+
 		&-next {
-            background-color: transparent;
-            opacity: 0;
-            overflow: hidden;
+			right: 0;
 			&--fake {
 				font-size: 50px;
-				color: red;
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
+				color: white;
+			}
+			&:focus, &:hover, &:active {
+				>.quiz__button-next--fake{
+					color: rgb(0, 217, 255);
+				}
+				
 			}
 		}
+		&-prev {
+			left: 0;
+			&--fake {
+				font-size: 50px;
+				color: white;
+			}
+			&:focus, &:hover, &active {
+				>.quiz__button-prev--fake{
+					color: rgb(0, 217, 255);
+				}
+				
+			}
+		}
+		&:focus{
+			outline: none;
+		}
+	
 	}
-	// &__button-next {
-	// 	position: absolute;
-	// 	top: 50%;
-	// 	right: 30px;
-	// 	&--fake {
-	// 	}
-	// }
+
 	&__text-loading {
 	}
 	&__section {
@@ -99,6 +82,14 @@
 					border-color: #6200eeff;
 					&::after {
 						background: #6200eeff;
+						opacity: 1;
+					}
+				}
+			}
+			&:focus {
+				+ span.quiz__radiobtn--fake {
+					&::before {
+						background-color: rgba(93, 195, 213, 0.481);
 						opacity: 1;
 					}
 				}

@@ -2,14 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 // import Pagination from './Pagination';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
-// import FocusTrap from 'focus-trap-react';
-import {Redirect} from "react-router-dom";
+import FocusTrap from 'focus-trap-react';
+// import {Redirect} from "react-router-dom";
 import './styles/Quiz.scss';
 import Modal from "./Modal"
 import {playTimes$, updatePlayTimes, correctNum$, updateCorrectNum, inCorrectNum$, updateInCorrectNum, correctPercent$, updateCorrectPercent, userAnswers$, updateUserAnswers} from "./store.js";
 
 const Quiz = ({ location }) => {
-	const [ datas, setDatas ] = useState([]);
+const [ datas, setDatas ] = useState([]);
 	const [ loading, setLoading ] = useState(true);
 	const [ currentPage, setCurrentPage ] = useState(1);
 	const [ dataPerPage, setDataPerpage ] = useState(1);
@@ -189,6 +189,7 @@ const Quiz = ({ location }) => {
   // console.log(correctAnswers)
 
 	return (
+	
 		<div className="quiz">
 			<h1 className="quiz__title">Quiz</h1>
 			<div className="quiz__container">
@@ -208,6 +209,7 @@ const Quiz = ({ location }) => {
 							'&rdquo;': '”'
 						};
 						return (
+						
 							<div className="quiz__section" key={data.question}>
 								<h1 className="quiz__text-question">
 									{data.question.replace(/&#?\w+;/g, (match) => entities[match])}
@@ -215,7 +217,8 @@ const Quiz = ({ location }) => {
 
 								{data.options.map((opt) => {
 									return (
-										<label htmlFor={opt} className="quiz__radiobtn" key={opt}>
+									
+										<label aria-labelledby={opt} htmlFor={opt} className="quiz__radiobtn" key={opt}>
 											<input
 												type="radio"
 												className="quiz__radiobtn-input"
@@ -226,36 +229,42 @@ const Quiz = ({ location }) => {
 												checked={checkedValue === opt}
 											/>
 											<span className="quiz__radiobtn--fake" />
-											<span className="quiz__radiobtn-option">
+											<span id={opt} className="quiz__radiobtn-option">
 												{opt.replace(/&#?\w+;/g, (match) => entities[match])}
 											</span>
 										</label>
+									
 									);
 								})}
 							</div>
+							
 						);
 					})
 				)}
 				{/* <FocusTrap active={!isOpen}> */}
 				{/* <Pagination dataPerPage={dataPerPage} totalDatas={datas.length} paginate={paginate} /> */}
 				{/* </FocusTrap> */}
+
         {loading? null:
         <>
         { currentPage === 1? null:
-         <div onClick={toPrev}  className="quiz__button-ctn quiz__button-ctn--left">
-					<button className="quiz__button quiz__button-prev" />
-					<MdNavigateBefore className="quiz__button-prev--fake" />
-				</div> }
+         
+					<button onClick={toPrev} className="quiz__button quiz__button-prev"><MdNavigateBefore className="quiz__button-prev--fake" /></button>
+		}
+		
          { currentPage === lastPage? null:
-	        <div onClick={toNext} className="quiz__button-ctn quiz__button-ctn--right">
-					<button  className="quiz__button quiz__button-next" />
-					<MdNavigateNext  className="quiz__button-next--fake" />  
-				</div> }
+	        // <div onClick={toNext} className="quiz__button-ctn quiz__button-ctn--right">
+					<button   onClick={toNext}  className="quiz__button quiz__button-next"> <MdNavigateNext  className="quiz__button-next--fake" /> </button>
+					
+			}
         </>}
+
         {currentPage === lastPage && <button onClick={showResult}>Result</button>}
         {showModal && <Modal showModal={showModal} onClose={()=>setShowModal(false)}/>}
 			</div>
 		</div>
+
+		// </FocusTrap>
 	);
 };
 

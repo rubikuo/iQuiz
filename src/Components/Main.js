@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import {Redirect} from "react-router-dom";
-// import FocusTrap from "focus-trap-react";
+import FocusTrap from "focus-trap-react";
 // import main from "./main";
 import './styles/Main.scss';
 import { BookIcon, MusicIcon, GameIcon, MovieIcon } from './ImgIcon.jsx';
@@ -42,7 +42,7 @@ const Main = ({isOpen}) => {
 
 
 	return (
-        // <FocusTrap active={!isOpen} >
+        <FocusTrap active={!isOpen} >
 		<div className="main">
 			<Helmet>
 				<title>Main</title>
@@ -72,11 +72,11 @@ const Main = ({isOpen}) => {
 					);
 				})}
 			</div>
-			{message !== '' && <span>{message}</span>}
+			{message !== '' && <span role="alert">{message}</span>}
 			<button onClick={startQuiz}>Start</button>
 			{/* <main catagories={catagories}/> */}
 		</div>
-		// </FocusTrap>
+		</FocusTrap>
 	);
 };
 

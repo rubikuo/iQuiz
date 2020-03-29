@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import {Redirect} from "react-router-dom";
-import FocusTrap from "focus-trap-react";
-// import main from "./main";
+import { Redirect } from 'react-router-dom';
+import FocusTrap from 'focus-trap-react';
 import './styles/Main.scss';
 import { BookIcon, MusicIcon, GameIcon, MovieIcon } from './ImgIcon.jsx';
-import axios from 'axios';
 
-const Main = ({isOpen}) => {
+const Main = ({ isOpen }) => {
 	const [ catagories, setCatagory ] = useState([
 		{ type: 'Books', id: 1, catagoryNum: 10 },
 		{ type: 'Music', id: 2, catagoryNum: 12 },
@@ -17,14 +15,10 @@ const Main = ({isOpen}) => {
 	const [ choice, setChoice ] = useState(null);
 	const [ redirectToQuiz, setRedirectToQuiz ] = useState(false);
 	const [ message, setMessage ] = useState('');
-	 
-	const chooseCatagory =(cat)=>{
-		console.log(cat)
-		setChoice(cat)
-	}
-	const startQuiz = (e) => {
+	// const [ cat, setCat ] = useState(null);
 
-		console.log(e.target)
+	const startQuiz = (e) => {
+		console.log(choice);
 		if (choice !== null) {
 			setRedirectToQuiz(true);
 		} else {
@@ -32,50 +26,65 @@ const Main = ({isOpen}) => {
 			setMessage('Please select the catagory');
 		}
 	};
-   
-	if(redirectToQuiz){
-		return <Redirect to={{
-            pathname: '/quiz',
-            state: { catagory: choice }
-        }}/>
+	if (redirectToQuiz) {
+		return (
+			<Redirect
+				to={{
+					pathname: '/quiz',
+					state: { catagory: choice }
+				}}
+			/>
+		);
 	}
 
-
 	return (
-        <FocusTrap active={!isOpen} >
-		<div className="main">
-			<Helmet>
-				<title>Main</title>
-			</Helmet>
-			<div className="main__card-group">
-				{catagories.map((cat) => {
-					return (
-						<div
-							onClick={() => chooseCatagory(cat.catagoryNum)}
-							key={cat.type}
-							id="cat.type"
-							className="main__card"
-						>
-							<div className="main__card-head">
-								{cat.type === 'Books' ? (
-									<BookIcon size={150} className="main__card-img" />
-								) : cat.type === 'Music' ? (
-									<MusicIcon size={150} className="main__card-img" />
-								) : cat.type === 'Video games' ? (
-									<GameIcon size={150} className="main__card-img" />
-								) : (
-									<MovieIcon size={150} className="main__card-img" />
-								)}
-							</div>
-							<div className="main__card-title">{cat.type}</div>
-						</div>
-					);
-				})}
+		<FocusTrap active={!isOpen}>
+			<div className="main">
+				<Helmet>
+					<title>Main</title>
+				</Helmet>
+				<div className="main__radiobtn-group">
+					{catagories.map((cat) => {
+						return (
+							<label
+								aria-labelledby={cat.type}
+								htmlFor={cat.type}
+								id={cat.id}
+								className="main__radiobtn"
+								key={cat.type}
+							>
+								<input
+									type="radio"
+									className="main__radiobtn-input"
+									name={cat.type}
+									id={cat.type}
+									value={cat.type}
+									onChange={() => setChoice(cat.catagoryNum)}
+									checked={cat === cat.catagoryNum}
+								/>
+								<div className="main__radiobtn--fake">
+									{cat.type === 'Books' ? (
+										<BookIcon size={150} className="main__img" />
+									) : cat.type === 'Music' ? (
+										<MusicIcon size={150} className="main__img" />
+									) : cat.type === 'Video games' ? (
+										<GameIcon size={150} className="main__img" />
+									) : (
+										<MovieIcon size={150} className="main__img" />
+									)}
+								</div>
+
+								<span className="main__radiobtn-option">{cat.type}</span>
+							</label>
+						);
+					})}
+				</div>
+				{message !== '' && <span role="alert">{message}</span>}
+				<button className="main__button-start" onClick={startQuiz}>
+					Start
+				</button>
+			
 			</div>
-			{message !== '' && <span role="alert">{message}</span>}
-			<button onClick={startQuiz}>Start</button>
-			{/* <main catagories={catagories}/> */}
-		</div>
 		</FocusTrap>
 	);
 };

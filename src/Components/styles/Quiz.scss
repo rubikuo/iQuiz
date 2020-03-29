@@ -4,6 +4,7 @@
 	color: white;
 
 	&__title {
+		padding: 2%;
 	}
 	&__container {
 		width: 100%;
@@ -18,7 +19,7 @@
 		padding: 0;
 
 		&-next {
-			right: 0;
+			right: 5%;
 			&--fake {
 				font-size: 50px;
 				color: white;
@@ -31,7 +32,7 @@
 			}
 		}
 		&-prev {
-			left: 0;
+			left: 5%;
 			&--fake {
 				font-size: 50px;
 				color: white;
@@ -53,8 +54,15 @@
 	}
 	&__section {
 		@extend %flexCCC;
+
 	}
 	&__text-question {
+		padding: 1% 5%;
+		text-align: center;
+		overflow-wrap: break-word;
+		word-wrap: break-word;
+		hyphens: auto;
+	
 	}
 	&__radiobtn {
 		width: 60%;
@@ -63,11 +71,11 @@
 		justify-content: flex-start;
 		// align-items: flex-start;
 		border: 1px solid white;
-		padding: 20px 30px;
+		padding: 3%;
+		border-radius: 10px;
 		overflow-wrap: break-word;
 		word-wrap: break-word;
 		hyphens: auto;
-		word-break: break-all;
 		&-input {
 			border: 0;
 			padding: 0;

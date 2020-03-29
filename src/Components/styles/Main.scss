@@ -4,29 +4,95 @@
 	color: white;
 	@extend %flexCCC;
 
-	&__card-group {
+	&__radiobtn-group {
 		padding: 20px;
 		width: 100%;
 		@extend %flexRCC;
 		flex-wrap: wrap;
 		flex-grow: 1;
 	}
-	&__card {
-		margin: 20px;
-		width: 220px;
-		@extend %flexCCC;
-		&-head {
-			width: 100%;
-			@extend %flexRCC;
-		}
-		&-img {
-			-webkit-filter: drop-shadow(0px 0px 3px rgb(255, 247, 0));
-			filter: drop-shadow(0px 0px 3px rgb(255, 247, 0));
-		}
 
-		&-title {
-			width: 100%;
-			text-align: center;
+	&__radiobtn {
+		@extend %flexCCC;
+		margin: 6% 2% 3% 2%;
+
+		&-input {
+			border: 0;
+			padding: 0;
+			width: 1px;
+			height: 1px;
+			margin: -1px;
+			opacity: 0;
+			position: absolute;
+			overflow: hidden;
+			&:checked {
+				+ div.main__radiobtn--fake {
+					border-color: #6200eeff;
+					&::after {
+						background: #6200eeff;
+						opacity: 1;
+					}
+				}
+			}
+			&:focus {
+				+ div.main__radiobtn--fake {
+					> .main__img {
+						-webkit-filter: drop-shadow(0px 0px 8px rgb(11, 254, 250));
+						filter: drop-shadow(0px 0px 8px rgb(11, 254, 250));
+					}
+				}
+			}
+			&:hover {
+				+ div.main__radiobtn--fake {
+					> .main__img {
+						-webkit-filter: drop-shadow(0px 0px 8px rgb(234, 0, 255));
+						filter: drop-shadow(0px 0px 8px rgb(234, 0, 255));
+					}
+				}
+			}
+			&:active {
+				+ div.main__radiobtn--fake {
+					> .main__img {
+						-webkit-filter: drop-shadow(0px 0px 8px rgb(0, 255, 251));
+						filter: drop-shadow(0px 0px 8px rgb(0, 255, 251));
+					}
+				}
+			}
+		}
+		&--fake {
+			&::after {
+				content: "";
+				display: block;
+				width: 10px;
+				height: 10px;
+				background: #00000089;
+				border-radius: 50%;
+				position: absolute;
+				box-shadow: 0px 0px 1px rgb(101, 100, 100);
+				top: 100%;
+				left: 50%;
+				transform: translate(-50%);
+				margin-top: -12.5px;
+				opacity: 0;
+				transition: all .3s ease;
+			}
+		}
+		&-option {
+			padding-top: 10px;
+			font-size: 1.1rem;
+		}
+	}
+	&__button-start {
+		width: 10%;
+		@extend %flexJC;
+		line-height: 20px;
+		border: 1px solid #ddd;
+		border-radius: 0.3rem;
+		margin: 7% 1% 0 1%;
+		font-size: 11px;
+		&:focus{
+			outline: none;
+			box-shadow: 0px 0px 10px 2px rgb(0, 255, 251);
 		}
 	}
 }

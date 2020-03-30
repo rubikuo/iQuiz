@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-// import Pagination from './Pagination';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
-import FocusTrap from 'focus-trap-react';
 import {Redirect} from "react-router-dom";
 import './styles/Quiz.scss';
 import Modal from "./Modal"
@@ -23,7 +21,7 @@ const Quiz = ({ location }) => {
 	const [inCorrectNum, setinCorrectNum] = useState(inCorrectNum$.value);
 	const [correctPercent, setCorrectPercent] = useState(correctPercent$.value);
 	const [userAnswers, setUserAnswers] = useState(userAnswers$.value);
-	const [redirect, setRedirect] = useState(false);
+	const [redirectStats, setRedirectStats] = useState(false);
 	const [redirectHome, setRedirectHome] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [answers, setAnswers] = useState([]);
@@ -63,12 +61,13 @@ const Quiz = ({ location }) => {
 
 	const getData = useCallback(
 		() => {
+			let CancelToken = axios.CancelToken;
+			let source = CancelToken.source();
 			axios
 				.get(url)
 				.then((response) => {
 					setTimeout(() => {
 						setLoading(false);
-
 					}, 3000)
 					let datas = response.data.results;
 					return datas;
@@ -94,7 +93,9 @@ const Quiz = ({ location }) => {
 				}).catch((err) => {
 					console.log(err)
 				})
+				return ()=>source.cancel();
 		},
+
 		[url]
 	);
 
@@ -105,7 +106,7 @@ const Quiz = ({ location }) => {
 
 	const shuffle = (array) => {
 		let shuffled = [];
-		let cpy = [...array]; // make a copy for the array because the array is only one level  the we dont want to alter the original array
+		let cpy = [...array]; 
 		while (cpy.length > 0) {
 			let randomIndex = Math.floor(Math.random() * cpy.length);
 			let value = cpy[randomIndex];
@@ -125,19 +126,26 @@ const Quiz = ({ location }) => {
 
 	const handleRadioBtn = (e) => {
 		setCheckedValue(e.target.value);
-		setAnswers([...answers, e.target.value]);
-		setIsChecked(true)
+		// setAnswers([...answers, e.target.value]);
+		// setIsChecked(true)
 	};
 
 
 	const toNext = () => {
 		console.log(checkedValue)
-		if (isChecked) {
-			// checkCorrect(answers)
-			setIsChecked(false)
-			setCurrentPage(currentPage + 1)
-		}
+		let copyAnswers = [...answers];
 
+		copyAnswers.splice(currentPage-1, 1, checkedValue); 
+		setAnswers(copyAnswers);
+		
+		if (checkedValue !=="") {
+			// checkCorrect(answers)
+			
+			setCurrentPage(currentPage + 1)
+			setCheckedValue(answers[currentPage])
+	
+		}
+	
 	}
 
 	const checkCorrect = (data) => {
@@ -153,7 +161,7 @@ const Quiz = ({ location }) => {
 		setPoint(points)
 	}
 
-	console.log(correctAnswers)
+	console.log(answers)
 
 
 	// const toNext = () => {
@@ -194,45 +202,33 @@ const Quiz = ({ location }) => {
 	// console.log(copyarr)
 
 	const toPrev = () => {
-		console.log("hello")
-		if (!isChecked) {
-			setIsChecked(true)
-
-		} else {
-			setIsChecked(false)
-		}
-
+	   
 		setCurrentPage(currentPage - 1)
+
+		setCheckedValue(answers[currentPage-2])
 
 	}
 
 
 	const showResult = () => {
 		checkCorrect(answers)
-
-		updatePlayTimes(playTimes +1) //confirm with andreas do parseInt in localstorage
+		updatePlayTimes(playTimes +1) 
 		setIsChecked(false)
-		// setRedirect(true)
 		setShowModal(true)
-		
-
 	}
+
 	console.log(playTimes$.value)
 
 
    const onCloseModal =()=>{
 	setShowModal(false) 
-	setRedirect(true)
+	setRedirectStats(true)
 
    }
    
-	if(redirect){
+	if(redirectStats){
 		return <Redirect to={{
-	          pathname: '/stats',
-			  state:{playtimes: playTimes,
-					 correctnum: correctNum,
-					 inCorrectnum: inCorrectNum,
-					 correctpercent: correctPercent} //?
+	          pathname: '/stats'
 	      }}/>
 	}
 
@@ -251,8 +247,7 @@ const Quiz = ({ location }) => {
 			<h1 className="quiz__title">Quiz</h1>
 			<div className="quiz__container">
 				{loading ? (
-					//confirm with Andreas "role" 
-					<TouchBallLoading role="loading icon" aria-label="" className="quiz__text-loading" />
+					<TouchBallLoading role="alert" aria-busy="true" className="quiz__text-loading" />
 
 				) : (
 						currentDatas.map((data, index) => {
@@ -274,21 +269,22 @@ const Quiz = ({ location }) => {
 										{data.question.replace(/&#?\w+;/g, (match) => entities[match])}
 									</h3>
 
-									{data.options.map((opt) => {
+									{data.options.map((opt, i) => {
 										return (
 
-											<label aria-labelledby={opt} htmlFor={opt} className="quiz__radiobtn" key={opt}>
+											<label htmlFor={opt+i} className="quiz__radiobtn" key={opt}>
 												<input
+												    aria-labelledby={opt}
 													type="radio"
 													className="quiz__radiobtn-input"
 													name={catagory}
-													id={opt}
+													id={opt+i}
 													value={opt}
 													onChange={handleRadioBtn}
 													checked={checkedValue === opt}
 												/>
 												<span className="quiz__radiobtn--fake" />
-												<span className="quiz__radiobtn-option">
+												<span id={opt} className="quiz__radiobtn-option">
 													{opt.replace(/&#?\w+;/g, (match) => entities[match])}
 												</span>
 											</label>
@@ -300,24 +296,22 @@ const Quiz = ({ location }) => {
 							);
 						})
 					)}
-				{/* <FocusTrap active={!isOpen}> */}
+		
 				{/* <Pagination dataPerPage={dataPerPage} totalDatas={datas.length} paginate={paginate} /> */}
-				{/* </FocusTrap> */}
+			
 
 				{loading ? null :
 					<>
 						{currentPage === 1 ? null :
-
-							<button onClick={toPrev} className="quiz__button quiz__button-prev"><MdNavigateBefore className="quiz__button-prev--fake" /></button>
+							<button aria-label="Previous" onClick={toPrev} className="quiz__button quiz__button-prev"><MdNavigateBefore className="quiz__button-prev--fake" /></button>
 						}
 
-						{currentPage === lastPage ? null :
-							<button onClick={toNext} className="quiz__button quiz__button-next"> <MdNavigateNext className="quiz__button-next--fake" /> </button>
-
+						{currentPage === lastPage ? null :  
+							<button aria-label="Next" onClick={checkedValue? toNext: null} className="quiz__button quiz__button-next"> <MdNavigateNext className="quiz__button-next--fake" /> </button>
 						}
-					</>}
+					</>}    
 
-				{currentPage === lastPage && <button className="quiz__button-result" onClick={showResult}>Result</button>}
+				{currentPage === lastPage && <button aria-label="View result" className="quiz__button-result" onClick={showResult}>Result</button>}
 				{showModal && <Modal showModal={showModal} onClose={onCloseModal} point={point} onRedirectHome={()=>setRedirectHome(true)} />}
 			</div>
 		</div>

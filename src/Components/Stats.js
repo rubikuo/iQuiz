@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { playTimes$, updatePlayTimes, correctNum$, updateCorrectNum, inCorrectNum$, updateInCorrectNum, correctPercent$, updateCorrectPercent, userAnswers$, updateUserAnswers } from "./store.js"; // need to subscrib in useeffect otherwise pass from parent
+import { playTimes$, updatePlayTimes, correctNum$, updateCorrectNum, inCorrectNum$, updateInCorrectNum, correctPercent$, updateCorrectPercent } from "./store.js"; // need to subscrib in useeffect otherwise pass from parent
 import "./styles/Stats.scss";
-import {Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
  const Stats = () =>{
@@ -9,15 +9,13 @@ import {Redirect} from "react-router-dom";
 	const [correctNum, setCorrectNum] = useState(correctNum$.value);
 	const [inCorrectNum, setinCorrectNum] = useState(inCorrectNum$.value);
 	const [correctPercent, setCorrectPercent] = useState(correctPercent$.value);
-	const [userAnswers, setUserAnswers] = useState(userAnswers$.value);
+    const [userAnswers, setUserAnswers] = useState(userAnswers$.value);
+    const [isPressed, setIsPressed] = useState(false);
 
    const resetStats = ()=>{
        updatePlayTimes(null) //confirm with Andreas why i need to render the page again to see the updated number? 
-
    }
-   const returnHome = ()=>{
 
-   }
  
    useEffect(() => {
 
@@ -52,7 +50,7 @@ import {Redirect} from "react-router-dom";
          <h3 className="stats__info stats__info-incorrects">Incorrects</h3>
          <h3 className="stats__info stats__info-correctPercent">Percent</h3>
          <button onClick={resetStats}>Reset</button>
-         {/* <button onClick={}>Back to home</button> make into link */}
+         <Link to="/" role="button">Return to Home</Link>
         </div>
     )
 

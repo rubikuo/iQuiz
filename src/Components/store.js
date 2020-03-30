@@ -51,28 +51,3 @@ export function updateCorrectPercent(num) {
 	correctPercent$.next(num);
 }
 
-// to save user's answers 
-export const userAnswers$ = new BehaviorSubject(JSON.parse(localStorage.getItem('userAnswers') || '[]'));
-
-export function updateUserAnswers(answerObj) {
-    const newUserAnswers = [ ...userAnswers$.value ]; // to copy the array from localstorage
-
-	if (newUserAnswers.find((x) => x.id === answerObj.id)) {
-		// check if its in the array
-        let index= newUserAnswers.findIndex((x) => x.id === answerObj.id);
-        newUserAnswers[index].answer = answerObj.answer; 
-
-		localStorage.setItem('userAnswers', JSON.stringify(newUserAnswers));
-		userAnswers$.next(newUserAnswers); // update localstorage
-	} else {
-		newUserAnswers.push(answerObj); // if there is not then push answerObj({id: page , answer:check})
-		localStorage.setItem('userAnswers', JSON.stringify(newUserAnswers));
-		userAnswers$.next(newUserAnswers);
-	}
-}
-
-
-export function clearUserAnswers() {
-	userAnswers$.next([]);
-	localStorage.removeItem("userAnswers");
-}

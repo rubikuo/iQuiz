@@ -25,7 +25,8 @@ const SidebarNav = ({isOpen, onClose}) =>{
         )}
         <aside className={asideClassName}>
             <ul className="sidebar__menu">
-            <li className="sidebar__menu-item"><a href="/"  className="sidebar__menu-link"> Play Ground</a> </li>
+            <li className="sidebar__menu-item"><a href="/"  className="sidebar__menu-link"> Home</a> </li>
+            <li className="sidebar__menu-item"><a href="/quiz"  className="sidebar__menu-link"> Play Ground</a> </li>
             <li className="sidebar__menu-item"><a href="/stats"  className="sidebar__menu-link"> Stats </a> </li>
             <li className="sidebar__menu-item"><a href="/about" className="sidebar__menu-link"> About iQuiz</a> </li>  
             </ul>

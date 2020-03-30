@@ -3,7 +3,7 @@ import axios from 'axios';
 // import Pagination from './Pagination';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import FocusTrap from 'focus-trap-react';
-// import {Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import './styles/Quiz.scss';
 import Modal from "./Modal"
 import { playTimes$, updatePlayTimes, correctNum$, updateCorrectNum, inCorrectNum$, updateInCorrectNum, correctPercent$, updateCorrectPercent, userAnswers$, updateUserAnswers } from "./store.js";
@@ -23,7 +23,8 @@ const Quiz = ({ location }) => {
 	const [inCorrectNum, setinCorrectNum] = useState(inCorrectNum$.value);
 	const [correctPercent, setCorrectPercent] = useState(correctPercent$.value);
 	const [userAnswers, setUserAnswers] = useState(userAnswers$.value);
-	// const [redirect, setRedirect] = useState(false);
+	const [redirect, setRedirect] = useState(false);
+	const [redirectHome, setRedirectHome] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [answers, setAnswers] = useState([]);
 
@@ -207,17 +208,36 @@ const Quiz = ({ location }) => {
 
 
 	const showResult = () => {
-	    checkCorrect(answers)
+		checkCorrect(answers)
+
+		updatePlayTimes(playTimes +1) //confirm with andreas do parseInt in localstorage
 		setIsChecked(false)
+		// setRedirect(true)
 		setShowModal(true)
+		
+
 	}
-	// if(redirect){
-	// 	return <Redirect to={{
-	//           pathname: '/stats'
-	//       }}/>
-	// }
+	console.log(playTimes$.value)
 
 
+   const onCloseModal =()=>{
+	setShowModal(false) 
+	setRedirect(true)
+
+   }
+   
+	if(redirect){
+		return <Redirect to={{
+	          pathname: '/stats',
+			  state:{redirectHome: redirectHome} //?
+	      }}/>
+	}
+
+	if(redirectHome){
+		return <Redirect to={{
+			pathname: '/'
+		}}/>
+	}
 
 
 	// console.log(correctAnswers)
@@ -229,7 +249,7 @@ const Quiz = ({ location }) => {
 			<div className="quiz__container">
 				{loading ? (
 					//confirm with Andreas "role" 
-					<TouchBallLoading role="loading icon" className="quiz__text-loading" />
+					<TouchBallLoading role="loading icon" aria-label="" className="quiz__text-loading" />
 
 				) : (
 						currentDatas.map((data, index) => {
@@ -295,7 +315,7 @@ const Quiz = ({ location }) => {
 					</>}
 
 				{currentPage === lastPage && <button className="quiz__button-result" onClick={showResult}>Result</button>}
-				{showModal && <Modal showModal={showModal} onClose={() => setShowModal(false)} point={point} />}
+				{showModal && <Modal showModal={showModal} onClose={onCloseModal} point={point} onRedirectHome={()=>setRedirectHome(true)} />}
 			</div>
 		</div>
 

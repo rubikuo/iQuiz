@@ -2,7 +2,7 @@ import { BehaviorSubject } from 'rxjs';
 
 
 // save how many games 
-export const playTimes$ = new BehaviorSubject(localStorage.getItem('times') || 0);
+export const playTimes$ = new BehaviorSubject(parseInt(localStorage.getItem('times')) || 0);
 
 export function updatePlayTimes(time) {
 	 if (time) {
@@ -15,7 +15,7 @@ export function updatePlayTimes(time) {
 
 
 // save how many correct 
-export const correctNum$ = new BehaviorSubject(localStorage.getItem('correctNum') || 0);
+export const correctNum$ = new BehaviorSubject(parseInt(localStorage.getItem('correctNum')) || 0);
 
 export function updateCorrectNum(num) {
 	 if (num) {
@@ -27,7 +27,7 @@ export function updateCorrectNum(num) {
 }
 
 // save incorrect 
-export const inCorrectNum$ = new BehaviorSubject(localStorage.getItem('inCorrectNum') || 0);
+export const inCorrectNum$ = new BehaviorSubject(parseInt(localStorage.getItem('inCorrectNum')) || 0);
 
 export function updateinCorrectNum(num) {
 	 if (num) {
@@ -40,7 +40,7 @@ export function updateinCorrectNum(num) {
 
 
 // save percentage
-export const correctPercent$ = new BehaviorSubject(localStorage.getItem('correctPercent') || 0);
+export const correctPercent$ = new BehaviorSubject(parseInt(localStorage.getItem('correctPercent'))|| 0);
 
 export function updateCorrectPercent(num) {
 	 if (num) {
@@ -71,13 +71,8 @@ export function updateUserAnswers(answerObj) {
 	}
 }
 
-// export function removeFavoriteByPath(path) {
-// 	const newFavorites = favorites$.value.filter(x => x.path_lower !== path);
-// 	localStorage.setItem('favorites', JSON.stringify(newFavorites));
-// 	favorites$.next(newFavorites);
-// }
 
-// export function clearFavorites() {
-// 	favorites$.next([]);
-// 	localStorage.removeItem("favorites");
-// }
+export function clearUserAnswers() {
+	userAnswers$.next([]);
+	localStorage.removeItem("userAnswers");
+}

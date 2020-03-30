@@ -38,7 +38,7 @@ const Main = ({ isOpen }) => {
 	}
 
 	return (
-		<FocusTrap active={!isOpen}>
+		// <FocusTrap>
 			<div className="main">
 				<Helmet>
 					<title>Main</title>
@@ -85,7 +85,7 @@ const Main = ({ isOpen }) => {
 				</button>
 			
 			</div>
-		</FocusTrap>
+		// </FocusTrap>
 	);
 };
 

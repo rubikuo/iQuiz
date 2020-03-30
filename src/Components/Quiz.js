@@ -229,7 +229,10 @@ const Quiz = ({ location }) => {
 	if(redirect){
 		return <Redirect to={{
 	          pathname: '/stats',
-			  state:{redirectHome: redirectHome} //?
+			  state:{playtimes: playTimes,
+					 correctnum: correctNum,
+					 inCorrectnum: inCorrectNum,
+					 correctpercent: correctPercent} //?
 	      }}/>
 	}
 

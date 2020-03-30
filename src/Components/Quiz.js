@@ -7,6 +7,7 @@ import FocusTrap from 'focus-trap-react';
 import './styles/Quiz.scss';
 import Modal from "./Modal"
 import { playTimes$, updatePlayTimes, correctNum$, updateCorrectNum, inCorrectNum$, updateInCorrectNum, correctPercent$, updateCorrectPercent, userAnswers$, updateUserAnswers } from "./store.js";
+import { TouchBallLoading } from 'react-loadingg';
 
 const Quiz = ({ location }) => {
 	const [datas, setDatas] = useState([]);
@@ -24,7 +25,7 @@ const Quiz = ({ location }) => {
 	const [userAnswers, setUserAnswers] = useState(userAnswers$.value);
 	// const [redirect, setRedirect] = useState(false);
 	const [showModal, setShowModal] = useState(false);
-	const [answers, setAnswers]= useState([]);
+	const [answers, setAnswers] = useState([]);
 
 
 
@@ -54,8 +55,6 @@ const Quiz = ({ location }) => {
 	}, []);
 
 
-	//  const [options, setOptions] = useState([]);
-
 	let catagory = location.state.catagory;
 
 
@@ -66,9 +65,11 @@ const Quiz = ({ location }) => {
 			axios
 				.get(url)
 				.then((response) => {
-					let datas = response.data.results;
-					setLoading(false);
+					setTimeout(() => {
+						setLoading(false);
 
+					}, 3000)
+					let datas = response.data.results;
 					return datas;
 				})
 				.then((datas) => {
@@ -78,7 +79,7 @@ const Quiz = ({ location }) => {
 					copyDatas.map((data) => {
 						let allAnswers = [...data.incorrect_answers, data.correct_answer];
 						allCorrectAnswers.push(data.correct_answer)
-						console.log(allAnswers);
+						// console.log(allAnswers);
 						let shuffledArr = shuffle(allAnswers);
 						let newDatas = {
 							options: shuffledArr,
@@ -123,33 +124,61 @@ const Quiz = ({ location }) => {
 
 	const handleRadioBtn = (e) => {
 		setCheckedValue(e.target.value);
+		setAnswers([...answers, e.target.value]);
 		setIsChecked(true)
 	};
 
+
 	const toNext = () => {
-		console.log("hi")
+		console.log(checkedValue)
 		if (isChecked) {
-			setIsChecked(false);
-			// let copyUserAnswers=[...userAnswers];
-			let eachAnswer = {
-				answer: checkedValue,
-				id: currentPage
-			}
-			updateUserAnswers(eachAnswer);
-
-			console.log(userAnswers$.value)
-
-            
-
-			// setUserAnswers(copyUserAnswers)
-
+			// checkCorrect(answers)
+			setIsChecked(false)
 			setCurrentPage(currentPage + 1)
-
 		}
-		setIsChecked(true);
 
 	}
-	console.log(showModal)
+
+	const checkCorrect = (data) => {
+		console.log(point)
+		let copyCorrects=[...correctAnswers];
+	    let copyAll = [...answers];
+		let correct = copyCorrects.filter(function (word) {
+			return copyAll.includes(word);
+		})
+		console.log(correct);
+		let points = correct.length;
+		console.log(points)
+		setPoint(points)
+	}
+
+	console.log(correctAnswers)
+
+
+	// const toNext = () => {
+	// 	console.log("hi")
+	// 	if (isChecked) {
+	// 		setIsChecked(false);
+	// 		// let copyUserAnswers=[...userAnswers];
+	// 		let eachAnswer = {
+	// 			answer: checkedValue,
+	// 			id: currentPage
+	// 		}
+	// 		updateUserAnswers(eachAnswer);
+
+	// 		console.log(userAnswers$.value)
+
+
+
+	// 		// setUserAnswers(copyUserAnswers)
+
+	// 		setCurrentPage(currentPage + 1)
+
+	// 	}
+	// 	setIsChecked(true);
+
+	// }
+	// console.log(showModal)
 	////demo for myself to see how to update the useranswers
 	// let currentNum= 1;
 	// let value = "ok";
@@ -178,9 +207,9 @@ const Quiz = ({ location }) => {
 
 
 	const showResult = () => {
-		console.log("hi")
+	    checkCorrect(answers)
+		setIsChecked(false)
 		setShowModal(true)
-
 	}
 	// if(redirect){
 	// 	return <Redirect to={{
@@ -199,7 +228,9 @@ const Quiz = ({ location }) => {
 			<h1 className="quiz__title">Quiz</h1>
 			<div className="quiz__container">
 				{loading ? (
-					<h2 className="quiz__text-loading">Loading...</h2>
+					//confirm with Andreas "role" 
+					<TouchBallLoading role="loading icon" className="quiz__text-loading" />
+
 				) : (
 						currentDatas.map((data, index) => {
 							const entities = {
@@ -234,7 +265,7 @@ const Quiz = ({ location }) => {
 													checked={checkedValue === opt}
 												/>
 												<span className="quiz__radiobtn--fake" />
-												<span  className="quiz__radiobtn-option">
+												<span className="quiz__radiobtn-option">
 													{opt.replace(/&#?\w+;/g, (match) => entities[match])}
 												</span>
 											</label>
@@ -258,14 +289,13 @@ const Quiz = ({ location }) => {
 						}
 
 						{currentPage === lastPage ? null :
-							// <div onClick={toNext} className="quiz__button-ctn quiz__button-ctn--right">
 							<button onClick={toNext} className="quiz__button quiz__button-next"> <MdNavigateNext className="quiz__button-next--fake" /> </button>
 
 						}
 					</>}
 
 				{currentPage === lastPage && <button className="quiz__button-result" onClick={showResult}>Result</button>}
-				{showModal && <Modal showModal={showModal} onClose={() => setShowModal(false)} />}
+				{showModal && <Modal showModal={showModal} onClose={() => setShowModal(false)} point={point} />}
 			</div>
 		</div>
 

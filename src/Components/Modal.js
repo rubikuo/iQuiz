@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import "./styles/Modal.scss";
 
 
-const Modal = ({onClose, showModal}) => {
+const Modal = ({onClose, showModal, point}) => {
 
     
     const restart =()=>{
@@ -23,7 +23,7 @@ const Modal = ({onClose, showModal}) => {
 				</div>
 
 				<p>
-					Your have 10/10 questions correct!
+					Your have {point}/10 questions correct!
 				</p>
 
 				<div className="modal__button-ctn">
@@ -31,7 +31,7 @@ const Modal = ({onClose, showModal}) => {
 						onClick={restart}
 						className="modal__button modal__buttons--blue"
 					>
-						Delete
+						Restart
 					</button>
 					<button onClick={onClose} className="modal__button">
 						Cancel

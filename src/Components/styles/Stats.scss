@@ -9,4 +9,17 @@
 
         }
     }
+    &__button{
+        &-home{
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            color: white;
+            text-decoration: none;
+            &:hover{
+                text-decoration: none;
+                color: white;
+            }
+        }
+    }
 }

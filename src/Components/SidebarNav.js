@@ -3,8 +3,6 @@ import "./styles/SidebarNav.scss";
 import FocusTrap from "focus-trap-react";
 
 
-
-
 const SidebarNav = ({ isOpen, onClose }) => {
     let asideClassName = "sidebar"
     if (!isOpen) {
@@ -16,7 +14,6 @@ const SidebarNav = ({ isOpen, onClose }) => {
         if(e.keyCode === 27){
             onClose();
         }
-
     }
 
 

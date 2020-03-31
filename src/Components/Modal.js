@@ -2,8 +2,9 @@ import React from 'react';
 import FocusTrap from 'focus-trap-react';
 import ReactDOM from 'react-dom';
 import './styles/Modal.scss';
+import Button from 'react-bootstrap/Button';
 
-const Modal = ({ onClose, showModal, point, onRedirectHome }) => {
+const Modal = ({ onRedirectStats, showModal, point, onRedirectHome }) => {
 	let message;
 	if (point === 0) {
 		message = 'Ooops..';
@@ -33,14 +34,22 @@ const Modal = ({ onClose, showModal, point, onRedirectHome }) => {
 					<p id="dialogDesc">Your have {point}/10 questions correct!</p>
 
 					<div className="modal__button-ctn">
-						<button
-							aria-label="restart"
+						{/* <button
+							aria-label="return home"
 							onClick={onRedirectHome}
 							className="modal__button modal__buttons--blue"
 						>
-							Restart
+							Home
+						</button> */}
+
+						<button
+							aria-label="return home"
+							onClick={onRedirectHome}
+							className="modal__button modal__buttons--blue"
+						>
+							Home
 						</button>
-						<button aria-label="view stats" onClick={onClose} className="modal__button">
+						<button aria-label="view stats" onClick={onRedirectStats} className="modal__button">
 							Stats
 						</button>
 					</div>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router-dom';
-import FocusTrap from 'focus-trap-react';
 import './styles/Main.scss';
 import { BookIcon, MusicIcon, GameIcon, MovieIcon } from './ImgIcon.jsx';
+import Button from 'react-bootstrap/Button';
 
-const Main = ({ isOpen }) => {
+const Main = () => {
 	const [ catagories ] = useState([
 		{ type: 'Books', id: 1, catagoryNum: 10 },
 		{ type: 'Music', id: 2, catagoryNum: 12 },
@@ -26,6 +26,12 @@ const Main = ({ isOpen }) => {
 			setMessage('Please select the catagory');
 		}
 	};
+
+	const chooseCat = (num)=>{
+		setChoice(num);
+		setMessage("")
+
+	}
 
 	if (redirectToQuiz) {
 		return (
@@ -54,7 +60,7 @@ const Main = ({ isOpen }) => {
 								name="catagory"
 								id={cat.type + i}
 								value={cat.type}
-								onChange={() => setChoice(cat.catagoryNum)}
+								onChange={() => chooseCat(cat.catagoryNum)}
 								checked={cat === cat.catagoryNum}
 							/>
 							<div className="main__radiobtn--fake">
@@ -77,9 +83,9 @@ const Main = ({ isOpen }) => {
 				})}
 			</div>
 			{message !== '' && <span role="alert">{message}</span>}
-			<button aria-label="Start Game" className="main__button-start" onClick={startQuiz}>
+			<Button aria-label="Start Game" className="main__button-start" onClick={startQuiz}>
 				Start
-			</button>
+			</Button>
 		</div>
 	);
 };

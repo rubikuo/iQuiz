@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import './styles/Quiz.scss';
-import Modal from "./Modal"
-import { playTimes$, updatePlayTimes, correctNum$, updateCorrectNum, inCorrectNum$, updateInCorrectNum, correctPercent$, updateCorrectPercent, userAnswers$, updateUserAnswers } from "./store.js";
+// import Modal from "./Modal"
+import { playTimes$, updatePlayTimes, correctNum$, updateCorrectNum, inCorrectNum$, updateInCorrectNum, correctPercent$, updateCorrectPercent } from "./store.js";
 import { TouchBallLoading } from 'react-loadingg';
+import NewModal from "./NewModal";
 
 const Quiz = ({ location }) => {
 	const [datas, setDatas] = useState([]);
@@ -13,14 +14,12 @@ const Quiz = ({ location }) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [dataPerPage, setDataPerpage] = useState(1);
 	const [checkedValue, setCheckedValue] = useState('');
-	const [isChecked, setIsChecked] = useState(false);
 	const [correctAnswers, setCorrectAnswers] = useState([]);
 	const [point, setPoint] = useState(0);
 	const [playTimes, setPlayTimes] = useState(playTimes$.value);
 	const [correctNum, setCorrectNum] = useState(correctNum$.value);
-	const [inCorrectNum, setinCorrectNum] = useState(inCorrectNum$.value);
+	const [inCorrectNum, setInCorrectNum] = useState(inCorrectNum$.value);
 	const [correctPercent, setCorrectPercent] = useState(correctPercent$.value);
-	const [userAnswers, setUserAnswers] = useState(userAnswers$.value);
 	const [redirectStats, setRedirectStats] = useState(false);
 	const [redirectHome, setRedirectHome] = useState(false);
 	const [showModal, setShowModal] = useState(false);
@@ -39,16 +38,12 @@ const Quiz = ({ location }) => {
 				setCorrectNum(num);
 			}),
 			inCorrectNum$.subscribe(num => {
-				setinCorrectNum(num);
+				setInCorrectNum(num);
 			}),
 			correctPercent$.subscribe(num => {
 				setCorrectPercent(num);
-			}),
-			userAnswers$.subscribe(answers => {
-				setUserAnswers(answers)
 			})
 		]
-
 
 		return () => subscriptions.forEach(x => x.unsubscribe());
 	}, []);
@@ -93,7 +88,7 @@ const Quiz = ({ location }) => {
 				}).catch((err) => {
 					console.log(err)
 				})
-				return ()=>source.cancel();
+			return () => source.cancel();
 		},
 
 		[url]
@@ -106,7 +101,7 @@ const Quiz = ({ location }) => {
 
 	const shuffle = (array) => {
 		let shuffled = [];
-		let cpy = [...array]; 
+		let cpy = [...array];
 		while (cpy.length > 0) {
 			let randomIndex = Math.floor(Math.random() * cpy.length);
 			let value = cpy[randomIndex];
@@ -117,129 +112,105 @@ const Quiz = ({ location }) => {
 	};
 
 	const indexOfLastData = currentPage * dataPerPage;
-	// console.log("indexLastData", indexOfLastData);
 	const indexOfFirstData = indexOfLastData - dataPerPage;
-	// console.log("indexFirstData", indexOfFirstData);
 	const currentDatas = datas.slice(indexOfFirstData, indexOfLastData);
-
 	const lastPage = Math.ceil(datas.length / dataPerPage);
 
 	const handleRadioBtn = (e) => {
 		setCheckedValue(e.target.value);
-		// setAnswers([...answers, e.target.value]);
-		// setIsChecked(true)
 	};
-
 
 	const toNext = () => {
 		console.log(checkedValue)
 		let copyAnswers = [...answers];
-
-		copyAnswers.splice(currentPage-1, 1, checkedValue); 
+		copyAnswers.splice(currentPage - 1, 1, checkedValue);
 		setAnswers(copyAnswers);
-		
-		if (checkedValue !=="") {
-			// checkCorrect(answers)
-			
+
+		if (checkedValue !== "") {
 			setCurrentPage(currentPage + 1)
 			setCheckedValue(answers[currentPage])
-	
 		}
-	
 	}
 
-	const checkCorrect = (data) => {
-		console.log(point)
-		let copyCorrects=[...correctAnswers];
-	    let copyAll = [...answers];
-		let correct = copyCorrects.filter(function (word) {
-			return copyAll.includes(word);
-		})
-		console.log(correct);
-		let points = correct.length;
-		console.log(points)
-		setPoint(points)
-	}
-
-	console.log(answers)
-
-
-	// const toNext = () => {
-	// 	console.log("hi")
-	// 	if (isChecked) {
-	// 		setIsChecked(false);
-	// 		// let copyUserAnswers=[...userAnswers];
-	// 		let eachAnswer = {
-	// 			answer: checkedValue,
-	// 			id: currentPage
-	// 		}
-	// 		updateUserAnswers(eachAnswer);
-
-	// 		console.log(userAnswers$.value)
-
-
-
-	// 		// setUserAnswers(copyUserAnswers)
-
-	// 		setCurrentPage(currentPage + 1)
-
-	// 	}
-	// 	setIsChecked(true);
-
-	// }
-	// console.log(showModal)
-	////demo for myself to see how to update the useranswers
-	// let currentNum= 1;
-	// let value = "ok";
-
-	// let array = [{id:1, an:"hello"}, {id:2, an:"hi"}];
-	//  let copyarr = [...array];
-	// let result= copyarr.findIndex((x)=>x.id=== currentNum&& x.an!==value)
-
-
-	// console.log(result)
-	// array[result].an=value;
-	// console.log(copyarr)
-
-	const toPrev = () => {
-	   
-		setCurrentPage(currentPage - 1)
-
-		setCheckedValue(answers[currentPage-2])
-
-	}
+	console.log(correctAnswers)
 
 
 	const showResult = () => {
-		checkCorrect(answers)
-		updatePlayTimes(playTimes +1) 
-		setIsChecked(false)
+		updatePlayTimes(playTimes + 1)
+		checkPoints(answers)
 		setShowModal(true)
 	}
 
-	console.log(playTimes$.value)
+	const checkPoints = (data) => {
+		console.log(point)
+		let copyCorrects = [...correctAnswers];
+		let copyAll = [...answers];
+		let correct = copyCorrects.filter(function (word) {
+			return copyAll.includes(word);
+		})
+
+		let points = correct.length;
+		let newIncorrect = 10 - points;
+		let newCorrect = correctNum + points;
+		// console.log("new correct", newCorrect);
+		let newPlayTime = playTimes + 1;
+		// console.log("newPlayTime", newPlayTime)
+
+		// console.log("after point", points);
+		setPoint(points);
+		updateCorrectNum(newCorrect);
+		updateInCorrectNum(inCorrectNum + newIncorrect);
+
+		let percentage = (newCorrect / newPlayTime * 10).toFixed(0)
+		// console.log("after correct", correctNum);
+		// console.log("after point", points);
+		// console.log(parseInt(percentage))
 
 
-   const onCloseModal =()=>{
-	setShowModal(false) 
-	setRedirectStats(true)
+		updateCorrectPercent(Number(percentage));
 
-   }
-   
-	if(redirectStats){
-		return <Redirect to={{
-	          pathname: '/stats'
-	      }}/>
 	}
 
-	if(redirectHome){
+
+
+	const toPrev = () => {
+		setCurrentPage(currentPage - 1)
+		setCheckedValue(answers[currentPage - 2])
+	}
+
+
+	console.log("playTime", playTimes$.value)
+
+	const onRestart = () =>{
+		setShowModal(false);
+		setCurrentPage(1);
+		setAnswers([]);
+		setDatas([]);
+		setLoading(true);
+		getData();
+		
+	}
+
+	const onRedirectStats = () => {
+		setShowModal(false)
+		setRedirectStats(true)
+	}
+	
+	const onRedirectHome = () => {
+		setShowModal(false)
+		setRedirectHome(true)
+	}
+	if (redirectStats) {
+		return <Redirect to={{
+			pathname: '/stats'
+		}} />
+	}
+
+	if (redirectHome) {
 		return <Redirect to={{
 			pathname: '/'
-		}}/>
+		}} />
 	}
-
-
-	// console.log(correctAnswers)
 
 	return (
 
@@ -272,13 +243,13 @@ const Quiz = ({ location }) => {
 									{data.options.map((opt, i) => {
 										return (
 
-											<label htmlFor={opt+i} className="quiz__radiobtn" key={opt}>
+											<label htmlFor={opt + i} className="quiz__radiobtn" key={opt}>
 												<input
-												    aria-labelledby={opt}
+													aria-labelledby={opt}
 													type="radio"
 													className="quiz__radiobtn-input"
 													name={catagory}
-													id={opt+i}
+													id={opt + i}
 													value={opt}
 													onChange={handleRadioBtn}
 													checked={checkedValue === opt}
@@ -296,9 +267,9 @@ const Quiz = ({ location }) => {
 							);
 						})
 					)}
-		
+
 				{/* <Pagination dataPerPage={dataPerPage} totalDatas={datas.length} paginate={paginate} /> */}
-			
+
 
 				{loading ? null :
 					<>
@@ -306,17 +277,18 @@ const Quiz = ({ location }) => {
 							<button aria-label="Previous" onClick={toPrev} className="quiz__button quiz__button-prev"><MdNavigateBefore className="quiz__button-prev--fake" /></button>
 						}
 
-						{currentPage === lastPage ? null :  
-							<button aria-label="Next" onClick={checkedValue? toNext: null} className="quiz__button quiz__button-next"> <MdNavigateNext className="quiz__button-next--fake" /> </button>
+						{currentPage === lastPage ? null :
+							<button aria-label="Next" onClick={checkedValue ? toNext : null} className="quiz__button quiz__button-next"> <MdNavigateNext className="quiz__button-next--fake" /> </button>
 						}
-					</>}    
+					</>}
 
 				{currentPage === lastPage && <button aria-label="View result" className="quiz__button-result" onClick={showResult}>Result</button>}
-				{showModal && <Modal showModal={showModal} onClose={onCloseModal} point={point} onRedirectHome={()=>setRedirectHome(true)} />}
+				{/* {showModal && <Modal showModal={showModal} onClose={onCloseModal} point={point} onRedirectHome={()=>setRedirectHome(true)} />} */}
+				<NewModal
+					show={showModal}
+					onRedirectStats={onRedirectStats} point={point} onRedirectHome={onRedirectHome} onRestart={onRestart}/>
 			</div>
 		</div>
-
-		// </FocusTrap>
 	);
 };
 

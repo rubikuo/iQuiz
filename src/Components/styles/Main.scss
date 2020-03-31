@@ -16,7 +16,6 @@
 		@extend %flexCCC;
 		margin: 6% 2% 3% 2%;
 
-
 		&-input {
 			border: 0;
 			padding: 0;
@@ -85,17 +84,17 @@
 			font-size: 1.1rem;
 		}
 	}
-	&__button-start {
-		width: 10%;
-		@extend %flexJC;
-		line-height: 20px;
-		border: 1px solid #ddd;
-		border-radius: 0.3rem;
-		margin: 7% 1% 0 1%;
-		font-size: 11px;
-		&:focus{
-			outline: none;
-			box-shadow: 0px 0px 10px 2px rgb(0, 255, 251);
-		}
-	}
+	// &__button-start {
+	// 	width: 10%;
+	// 	@extend %flexJC;
+	// 	line-height: 20px;
+	// 	border: 1px solid #ddd;
+	// 	border-radius: 0.3rem;
+	// 	margin: 7% 1% 0 1%;
+	// 	font-size: 11px;
+	// 	&:focus{
+	// 		outline: none;
+	// 		box-shadow: 0px 0px 10px 2px rgb(0, 255, 251);
+	// 	}
+	// }
 }

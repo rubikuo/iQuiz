@@ -29,7 +29,7 @@ export function updateCorrectNum(num) {
 // save incorrect 
 export const inCorrectNum$ = new BehaviorSubject(parseInt(localStorage.getItem('inCorrectNum')) || 0);
 
-export function updateinCorrectNum(num) {
+export function updateInCorrectNum(num) {
 	 if (num) {
 		localStorage.setItem('inCorrectNum', num);
 	} else {

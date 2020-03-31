@@ -5,7 +5,9 @@ import { Redirect } from "react-router-dom";
 import './styles/Quiz.scss';
 import { playTimes$, updatePlayTimes, correctNum$, updateCorrectNum, inCorrectNum$, updateInCorrectNum, correctPercent$, updateCorrectPercent } from "./store.js";
 import { TouchBallLoading } from 'react-loadingg';
+import { BookIcon, MusicIcon, GameIcon, MovieIcon } from './ImgIcon.jsx';
 import NewModal from "./NewModal";
+import Button from 'react-bootstrap/Button';
 
 const Quiz = ({ location }) => {
 	const [datas, setDatas] = useState([]);
@@ -48,10 +50,13 @@ const Quiz = ({ location }) => {
 	}, []);
 
 
-	let catagory = location.state.catagory;
+	let catagoryNum = location.state.catagory.catagoryNum;
+	console.log(catagoryNum)
+	let catagoryType = location.state.catagory.type;
 
 
-	let url = `https://opentdb.com/api.php?amount=10&category=${catagory}&difficulty=medium&type=multiple`;
+
+	let url = `https://opentdb.com/api.php?amount=10&category=${catagoryNum}&difficulty=medium&type=multiple`;
 
 	const getData = useCallback(
 		() => {
@@ -62,7 +67,7 @@ const Quiz = ({ location }) => {
 				.then((response) => {
 					setTimeout(() => {
 						setLoading(false);
-					}, 3000)
+					}, 2000)
 					let datas = response.data.results;
 					return datas;
 				})
@@ -122,7 +127,7 @@ const Quiz = ({ location }) => {
 	const toNext = () => {
 		console.log(checkedValue)
 		let copyAnswers = [...answers];
-		copyAnswers.splice(currentPage - 1, 1, checkedValue);
+		copyAnswers.splice(currentPage - 1, 1, checkedValue); //target current value in the array(the reason with currentpage -1 is the currentpage starts with 1), remove only this one, and replace with new value
 		setAnswers(copyAnswers);
 
 		if (checkedValue !== "") {
@@ -131,7 +136,7 @@ const Quiz = ({ location }) => {
 		}
 	}
 
-	console.log(correctAnswers)
+	console.log( "correctAnswers",correctAnswers)
 
 
 	const showResult = () => {
@@ -151,21 +156,12 @@ const Quiz = ({ location }) => {
 		let points = correct.length;
 		let newIncorrect = 10 - points;
 		let newCorrect = correctNum + points;
-		// console.log("new correct", newCorrect);
 		let newPlayTime = playTimes + 1;
-		// console.log("newPlayTime", newPlayTime)
 
-		// console.log("after point", points);
 		setPoint(points);
 		updateCorrectNum(newCorrect);
 		updateInCorrectNum(inCorrectNum + newIncorrect);
-
 		let percentage = (newCorrect / newPlayTime * 10).toFixed(0)
-		// console.log("after correct", correctNum);
-		// console.log("after point", points);
-		// console.log(parseInt(percentage))
-
-
 		updateCorrectPercent(Number(percentage));
 
 	}
@@ -179,6 +175,8 @@ const Quiz = ({ location }) => {
 
 	console.log("playTime", playTimes$.value)
 
+// eventlistener's functions for buttons on Modal
+
 	const onRestart = () =>{
 		setShowModal(false);
 		setCurrentPage(1);
@@ -186,7 +184,6 @@ const Quiz = ({ location }) => {
 		setDatas([]);
 		setLoading(true);
 		getData();
-		
 	}
 
 	const onRedirectStats = () => {
@@ -198,6 +195,7 @@ const Quiz = ({ location }) => {
 		setShowModal(false)
 		setRedirectHome(true)
 	}
+
 	if (redirectStats) {
 		return <Redirect to={{
 			pathname: '/stats'
@@ -213,10 +211,19 @@ const Quiz = ({ location }) => {
 	return (
 
 		<div className="quiz">
-			<h1 className="quiz__title">Quiz</h1>
+			{/* <h1 className="quiz__title">{catagoryType ==="music"}</h1> */}
+			<div className="quiz__icon-catagory">{catagoryType === 'Books' ? (
+									<BookIcon size={80} className="main__img" />
+								) : catagoryType === 'Music' ? (
+									<MusicIcon size={80} className="main__img" />
+								) : catagoryType === 'Video games' ? (
+									<GameIcon size={80} className="main__img" />
+								) : (
+									<MovieIcon size={80} className="main__img" />
+								)}</div>
 			<div className="quiz__container">
 				{loading ? (
-					<TouchBallLoading role="alert" aria-busy="true" className="quiz__text-loading" />
+					<TouchBallLoading role="alert" aria-busy="true" style={{height: "18rem"}} />
 
 				) : (
 						currentDatas.map((data, index) => {
@@ -235,7 +242,7 @@ const Quiz = ({ location }) => {
 
 								<div className="quiz__section" key={data.question}>
 									<h3 className="quiz__text-question">
-										{data.question.replace(/&#?\w+;/g, (match) => entities[match])}
+										{currentPage + "."} {data.question.replace(/&#?\w+;/g, (match) => entities[match])}
 									</h3>
 
 									{data.options.map((opt, i) => {
@@ -246,7 +253,7 @@ const Quiz = ({ location }) => {
 													aria-labelledby={opt}
 													type="radio"
 													className="quiz__radiobtn-input"
-													name={catagory}
+													name={catagoryType}
 													id={opt + i}
 													value={opt}
 													onChange={handleRadioBtn}
@@ -277,7 +284,7 @@ const Quiz = ({ location }) => {
 						}
 					</>}
 
-				{currentPage === lastPage && <button aria-label="View result" className="quiz__button-result" onClick={showResult}>Result</button>}
+				{currentPage === lastPage && <Button aria-label="View result" className="quiz__button-result" onClick={showResult}>Result</Button>}
 				<NewModal
 					show={showModal}
 					onRedirectStats={onRedirectStats} point={point} onRedirectHome={onRedirectHome} onRestart={onRestart}/>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-const Logo = () => {
+const Logo = ({className, width, height}) => {
 	return (
 		<svg
 			version="1.1"
@@ -10,11 +10,12 @@ const Logo = () => {
 			xmlnsXlink="http://www.w3.org/1999/xlink"
 			x="0px"
 			y="0px"
-			width="288px"
-			height="144px"
+			width={width}
+			height={height}
 			viewBox="0 0 288 144"
 			enableBackground="new 0 0 288 144"
 			xmlSpace="preserve"
+			className={className}
 		>
 			<font horizAdvX="2048">
 				<font-face
@@ -65,5 +66,12 @@ const Logo = () => {
 		</svg>
 	);
 };
+
+Logo.defaultProps = {
+	width: 288,
+    height: 144,
+	className: 'logo',
+};
+
 
 export default Logo;

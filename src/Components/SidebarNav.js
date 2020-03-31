@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "./styles/SidebarNav.scss";
 import FocusTrap from "focus-trap-react";
+import Logo from "../Logo";
 
 
 const SidebarNav = ({ isOpen, onClose }) => {
@@ -29,12 +30,12 @@ const SidebarNav = ({ isOpen, onClose }) => {
                         </label>
                     )}
                     <aside className={asideClassName}>
+                       <Logo className="sidebar__icon-logo"/>
                         <ul className="sidebar__menu">
                             <li className="sidebar__menu-item"><a href="/" className="sidebar__menu-link"> Home</a> </li>
                             <li className="sidebar__menu-item"><a href="/stats" className="sidebar__menu-link"> Stats </a> </li>
                             <li className="sidebar__menu-item"><a href="/about" className="sidebar__menu-link"> About iQuiz</a> </li>
                         </ul>
-
                     </aside>
                 </div>
             </FocusTrap>

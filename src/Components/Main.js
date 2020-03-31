@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 import './styles/Main.scss';
@@ -27,8 +27,8 @@ const Main = () => {
 		}
 	};
 
-	const chooseCat = (num)=>{
-		setChoice(num);
+	const chooseCat = (catagory)=>{
+		setChoice(catagory);
 		setMessage("")
 
 	}
@@ -60,7 +60,7 @@ const Main = () => {
 								name="catagory"
 								id={cat.type + i}
 								value={cat.type}
-								onChange={() => chooseCat(cat.catagoryNum)}
+								onChange={() => chooseCat(cat)}
 								checked={cat === cat.catagoryNum}
 							/>
 							<div className="main__radiobtn--fake">

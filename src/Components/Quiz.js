@@ -172,7 +172,6 @@ const Quiz = ({ location }) => {
 	}
 
 
-
 	const toPrev = () => {
 		setCurrentPage(currentPage - 1)
 		setCheckedValue(answers[currentPage - 2])

@@ -4,7 +4,8 @@
 	color: white;
 
 	&__title {
-		padding: 2%;
+		padding: 1%;
+		margin: 0;
 	}
 	&__container {
 		width: 100%;
@@ -56,6 +57,7 @@
 	}
 	&__text-question {
 		padding: 2% 5%;
+		font-size: 1.5rem;
 		text-align: center;
 		overflow-wrap: break-word;
 		word-wrap: break-word;
@@ -69,7 +71,7 @@
 		display: flex;
 		align-items: center;
 		border: 1px solid white;
-		padding: 3%;
+		padding: 2.5%;
 		border-radius: 10px;
 		overflow-wrap: break-word;
 		word-wrap: break-word;

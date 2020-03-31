@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from "react-bootstrap/Modal";
 import Button from 'react-bootstrap/Button';
 
-const NewModal = ( props)=>{
+const newModal = ( props)=>{
     let message;
 	if (props.point === 0) {
 		message = 'Ooops..';
@@ -44,4 +44,4 @@ const NewModal = ( props)=>{
     }
 
 
-export default NewModal
+export default newModal;

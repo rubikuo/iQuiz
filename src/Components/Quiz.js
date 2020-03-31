@@ -3,7 +3,6 @@ import axios from 'axios';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import { Redirect } from "react-router-dom";
 import './styles/Quiz.scss';
-// import Modal from "./Modal"
 import { playTimes$, updatePlayTimes, correctNum$, updateCorrectNum, inCorrectNum$, updateInCorrectNum, correctPercent$, updateCorrectPercent } from "./store.js";
 import { TouchBallLoading } from 'react-loadingg';
 import NewModal from "./NewModal";
@@ -267,9 +266,6 @@ const Quiz = ({ location }) => {
 						})
 					)}
 
-				{/* <Pagination dataPerPage={dataPerPage} totalDatas={datas.length} paginate={paginate} /> */}
-
-
 				{loading ? null :
 					<>
 						{currentPage === 1 ? null :
@@ -282,7 +278,6 @@ const Quiz = ({ location }) => {
 					</>}
 
 				{currentPage === lastPage && <button aria-label="View result" className="quiz__button-result" onClick={showResult}>Result</button>}
-				{/* {showModal && <Modal showModal={showModal} onClose={onCloseModal} point={point} onRedirectHome={()=>setRedirectHome(true)} />} */}
 				<NewModal
 					show={showModal}
 					onRedirectStats={onRedirectStats} point={point} onRedirectHome={onRedirectHome} onRestart={onRestart}/>

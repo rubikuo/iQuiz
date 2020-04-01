@@ -1,3 +1,5 @@
+@import "./variables";
+
 .stats{
     color: white;
     &__title{
@@ -9,6 +11,37 @@
 
         }
     }
+
+    &__progress{
+        width: 90%;
+        @extend %flexRCC;
+        flex-wrap: wrap;
+
+        &-ctn{
+            width: 180px;
+            margin: 3%;
+            &--correctRate{
+                width: 250px;
+            }
+            
+        }
+
+        &--img{
+            width: 40%;
+            margin-top: -5px;
+
+        }
+        &--text{
+            font-size: 1rem;
+            margin: -5px 0 1px 0;
+            &-sub{
+                color:  white;
+            }
+
+        }
+
+    }
+    
     &__button{
         &-home{
             display: inline-block;

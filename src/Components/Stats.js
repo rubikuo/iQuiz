@@ -7,19 +7,21 @@ import {
 	inCorrectNum$,
 	updateInCorrectNum,
 	correctPercent$,
-    updateCorrectPercent,
-    
+	updateCorrectPercent
 } from './store.js'; // need to subscrib in useeffect otherwise pass from parent
 import './styles/Stats.scss';
 import Button from 'react-bootstrap/Button';
-import { CircleProgress } from 'react-gradient-progress';
+import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import CircularProgress from "./CircularProgress";
 
 const Stats = () => {
 	const [ playTimes, setPlayTimes ] = useState(playTimes$.value);
 	const [ correctNum, setCorrectNum ] = useState(correctNum$.value);
 	const [ inCorrectNum, setInCorrectNum ] = useState(inCorrectNum$.value);
 	const [ correctPercent, setCorrectPercent ] = useState(correctPercent$.value);
-
+    const [ statsType] = useState([ "playTimes", "corrects", "incorrects", "correctRate"])
+	
 	const resetStats = () => {
 		updatePlayTimes(null); //confirm with Andreas why i need to render the page again to see the updated number?
 		updateCorrectNum(null);
@@ -46,21 +48,22 @@ const Stats = () => {
 		return () => subscriptions.forEach((x) => x.unsubscribe());
 	}, []);
 
+
+	 
+
 	return (
 		<div className="stats">
-			<h1 className="stats__title">Stats</h1>
-			<h3 className="stats__info">
-				Play <span className="stats__info-playtimes">{playTimes$.value === null ? 0 : playTimes}</span> times in
-				iQuiz
-			</h3>
-			<h3 className="stats__info stats__info-corrects">{correctNum$.value === null ? 0 : correctNum}Corrects</h3>
-			<h3 className="stats__info stats__info-incorrects">
-				{inCorrectNum$.value === null ? 0 : inCorrectNum} Incorrects
-			</h3>
-			<h3 className="stats__info stats__info-correctPercent">
-				{correctPercent$.value === null ? 0 : correctPercent}Percent
-			</h3>
-            <CircleProgress role="progressbar" aria-valuenow={correctPercent===null? 0: correctPercent} aria-valuemin="0" aria-valuemax="100" percentage={correctPercent===null? 0: correctPercent} strokeWidth={8} secondaryColor="#f0f0f0" primaryColor={['#002EC7', '#00FAD2']}/>
+
+			<session className = "stats__progress">
+				{statsType.map((type)=>{
+					return(
+						<div key="type" className={type==="correctRate"? "stats__progress-ctn stats__progress-ctn--correctRate": "stats__progress-ctn"}>
+						<CircularProgress type={type} correctPercent={correctPercent} playTimes={playTimes} correctNum={correctNum} inCorrectNum={inCorrectNum} />
+						</div>
+					)
+				})}
+				
+			</session>
 			<Button className="stats__button stats__button-reset" onClick={resetStats}>
 				Reset
 			</Button>

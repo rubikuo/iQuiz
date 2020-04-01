@@ -213,13 +213,13 @@ const Quiz = ({ location }) => {
 		<div className="quiz">
 			{/* <h1 className="quiz__title">{catagoryType ==="music"}</h1> */}
 			<div className="quiz__icon-catagory">{catagoryType === 'Books' ? (
-									<BookIcon size={80} className="main__img" />
+									<BookIcon size={100} className="main__img" />
 								) : catagoryType === 'Music' ? (
-									<MusicIcon size={80} className="main__img" />
+									<MusicIcon size={100} className="main__img" />
 								) : catagoryType === 'Video games' ? (
-									<GameIcon size={80} className="main__img" />
+									<GameIcon size={100} className="main__img" />
 								) : (
-									<MovieIcon size={80} className="main__img" />
+									<MovieIcon size={100} className="main__img" />
 								)}</div>
 			<div className="quiz__container">
 				{loading ? (
@@ -240,7 +240,7 @@ const Quiz = ({ location }) => {
 							};
 							return (
 
-								<div className="quiz__section" key={data.question}>
+								<section className="quiz__section" key={data.question}>
 									<h3 className="quiz__text-question">
 										{currentPage + "."} {data.question.replace(/&#?\w+;/g, (match) => entities[match])}
 									</h3>
@@ -267,7 +267,7 @@ const Quiz = ({ location }) => {
 
 										);
 									})}
-								</div>
+								</section>
 
 							);
 						})
@@ -287,7 +287,10 @@ const Quiz = ({ location }) => {
 				{currentPage === lastPage && <Button aria-label="View result" className="quiz__button-result" onClick={showResult}>Result</Button>}
 				<NewModal
 					show={showModal}
-					onRedirectStats={onRedirectStats} point={point} onRedirectHome={onRedirectHome} onRestart={onRestart}/>
+					onRedirectStats={onRedirectStats} 
+					point={point} 
+					onRedirectHome={onRedirectHome} 
+					onRestart={onRestart}/>
 			</div>
 		</div>
 	);

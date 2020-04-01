@@ -2,6 +2,9 @@
 
 .stats{
     color: white;
+    @extend %flexCCC;
+    width: 100%;
+
     &__title{
         color: grey;
     }
@@ -14,14 +17,19 @@
 
     &__progress{
         width: 90%;
-        @extend %flexRCC;
+        @extend %flexCCC;
         flex-wrap: wrap;
+
+        &-wrap{
+            @extend %flexRCC; 
+            width: 100%;
+        }
 
         &-ctn{
             width: 180px;
             margin: 3%;
             &--correctRate{
-                width: 250px;
+                width: 200px;
             }
             
         }

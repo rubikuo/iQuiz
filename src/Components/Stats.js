@@ -20,7 +20,7 @@ const Stats = () => {
 	const [ correctNum, setCorrectNum ] = useState(correctNum$.value);
 	const [ inCorrectNum, setInCorrectNum ] = useState(inCorrectNum$.value);
 	const [ correctPercent, setCorrectPercent ] = useState(correctPercent$.value);
-    const [ statsType] = useState([ "playTimes", "corrects", "incorrects", "correctRate"])
+    const [ statsType] = useState([ "Play Times", "Corrects", "Incorrects"])
 	
 	const resetStats = () => {
 		updatePlayTimes(null); //confirm with Andreas why i need to render the page again to see the updated number?
@@ -55,14 +55,18 @@ const Stats = () => {
 		<div className="stats">
 
 			<session className = "stats__progress">
+				<div className="stats__progress-wrap">
 				{statsType.map((type)=>{
 					return(
-						<div key="type" className={type==="correctRate"? "stats__progress-ctn stats__progress-ctn--correctRate": "stats__progress-ctn"}>
+						<div key="type" className="stats__progress-ctn">
 						<CircularProgress type={type} correctPercent={correctPercent} playTimes={playTimes} correctNum={correctNum} inCorrectNum={inCorrectNum} />
 						</div>
 					)
 				})}
-				
+				</div>
+				<div key="type" className= "stats__progress-ctn stats__progress-ctn--correctRate" >
+			<CircularProgress type="Correct Rate" correctPercent={correctPercent} playTimes={playTimes} correctNum={correctNum} inCorrectNum={inCorrectNum} />
+			</div>
 			</session>
 			<Button className="stats__button stats__button-reset" onClick={resetStats}>
 				Reset

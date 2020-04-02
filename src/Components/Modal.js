@@ -29,7 +29,7 @@ const Modal = ({ onRedirectHome, onRedirectStats, onRestart, point, showModal}) 
 						aria-hidden={!showModal}
 						className="modal__headline"
 					>
-						<h5 id="dialogTitle"> {message} </h5>
+						<h5 tabIndex={0} id="dialogTitle"> {message} </h5>
 					</div>
 
 					<p id="dialogDesc">Your have {point}/10 questions correct!</p>

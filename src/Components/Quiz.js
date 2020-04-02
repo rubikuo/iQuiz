@@ -27,6 +27,7 @@ const Quiz = ({ location }) => {
 	const [redirectHome, setRedirectHome] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [answers, setAnswers] = useState([]);
+	const [message, setMessage] = useState("");
 
 	let catagoryNum = location.state.catagory.catagoryNum;
 	// console.log(catagoryNum)
@@ -72,9 +73,7 @@ const Quiz = ({ location }) => {
 
 	useEffect(() => {
 		focusTime()
-		return () => {
-			clearTimeout(focusTime)
-		}
+		return () => clearTimeout(focusTime);
 
 	}, [focusTime])
 
@@ -84,7 +83,11 @@ const Quiz = ({ location }) => {
 	//      catagoryRef.current.focus()
 
 	// }, [])
-
+	 
+	const firstAnswerRef = useRef(null);
+	let focusFirstAnswer = () =>{
+			firstAnswerRef.current.focus()
+	}
 
 
 	//********** */ loading icon * *********//
@@ -109,12 +112,13 @@ const Quiz = ({ location }) => {
 	const getData = useCallback(
 		() => {
 
-			loadingTime();
+		
 			let CancelToken = axios.CancelToken;
 			let source = CancelToken.source();
 			axios
 				.get(url)
 				.then((response) => {
+					loadingTime();
 					let datas = response.data.results;
 					let copyDatas = [...datas];
 					let reEditedDatas = [];
@@ -133,7 +137,8 @@ const Quiz = ({ location }) => {
 
 					setCorrectAnswers(allCorrectAnswers)
 					setDatas(reEditedDatas);
-				}).catch((err) => {
+				})
+				.catch((err) => {
 					console.log(err)
 				})
 			return () => source.cancel();
@@ -167,25 +172,50 @@ const Quiz = ({ location }) => {
 
 	const handleRadioBtn = (e) => {
 		setCheckedValue(e.target.value);
+		setMessage("")
 	};
 
 	const toNext = () => {
-		console.log(checkedValue)
+		// console.log(checkedValue)
 		let copyAnswers = [...answers];
 		copyAnswers.splice(currentPage - 1, 1, checkedValue); //target current value in the array(the reason with currentpage -1 is the currentpage starts with 1), remove only this one, and replace with new value
 		setAnswers(copyAnswers);
+	
 
 		if (checkedValue !== "") {
 			setCurrentPage(currentPage + 1)
 			setCheckedValue(answers[currentPage])
 		}
+
+		
 		focusTime();
+		
 	}
 
-	console.log("correctAnswers", correctAnswers)
+	// console.log("correctAnswers", correctAnswers)
 
 
+	const promise = ()=>{
+		return new Promise((resolve)=>{
+            setTimeout(()=>{
+				resolve(focusFirstAnswer())
+			}, 2500)
+
+		})
+
+	}
+	
+   // control focus to target back onto the first item of answer after showing message //
+    const showMessage =()=>{
+		setMessage("Please choose message")
+		promise()
+		.then(()=>{
+			setMessage("")
+		})	
+	}
+	
 	const showResult = () => {
+		
 		updatePlayTimes(playTimes + 1)
 		checkPoints(answers)
 		setShowModal(true)
@@ -219,7 +249,7 @@ const Quiz = ({ location }) => {
 	}
 
 
-	console.log("playTime", playTimes$.value)
+	console.log("playTime", playTimes)
 
 	//********** */ eventlistener's functions for buttons on Modal **********//
 
@@ -300,6 +330,7 @@ const Quiz = ({ location }) => {
 
 											<label htmlFor={opt + i} className="quiz__radiobtn" key={opt}>
 												<input
+												    ref={i=== 0? firstAnswerRef:null}
 													aria-labelledby={opt}
 													type="radio"
 													className="quiz__radiobtn-input"
@@ -326,7 +357,7 @@ const Quiz = ({ location }) => {
 				{loading ? null :
 					<>
 						{currentPage === lastPage ? null :
-							<button aria-label="Next" onClick={checkedValue ? toNext : null} className="quiz__button quiz__button-next"> <MdNavigateNext className="quiz__button-next--fake" /> </button>
+							<button aria-label="Next" onClick={checkedValue ? toNext : showMessage} className="quiz__button quiz__button-next"> <MdNavigateNext className="quiz__button-next--fake" /> </button>
 						}
 						{currentPage === 1 ? null :
 							<button aria-label="Previous" onClick={toPrev} className="quiz__button quiz__button-prev"><MdNavigateBefore className="quiz__button-prev--fake" /></button>
@@ -334,8 +365,8 @@ const Quiz = ({ location }) => {
 
 
 					</>}
-
-				{currentPage === lastPage && <Button aria-label="View result" className="quiz__button-result" onClick={showResult}>Result</Button>}
+                {message!=="" && <p style={{color:"white"}} role="alert" aria-live="assertive">{message}</p>}
+				{currentPage === lastPage && <Button aria-label="View result" className="quiz__button-result" onClick={checkedValue ?showResult : showMessage}>Result</Button>}
 				{showModal && <Modal showModal={showModal} onRedirectStats={onRedirectStats} point={point} onRedirectHome={onRedirectHome}
 					onRestart={onRestart} />}
 			</div>

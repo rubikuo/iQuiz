@@ -15,7 +15,7 @@ const CircularProgress = ({correctPercent}) =>{
     return (       
 					<CircularProgressbarWithChildren
                         role="progressbar"
-                        styles ={buildStyles({pathColor:`rgb(106, 174, 210, ${correctPercent=== null? 0:correctPercent / 100})`})}
+                        styles ={buildStyles({pathColor:`rgb(77, 166, 255)`})}
                         aria-valuenow={correctPercent=== null? 0:correctPercent}
 						// aria-valuemin={type==="correctRate"? null: 0}
 						// aria-valuemax={type==="correctRate"? null: 100}

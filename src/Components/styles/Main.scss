@@ -39,24 +39,25 @@
 			&:focus {
 				+ div.main__radiobtn--fake {
 					> .main__img {
-						-webkit-filter: drop-shadow(0px 0px 8px rgb(11, 254, 250));
-						filter: drop-shadow(0px 0px 8px rgb(11, 254, 250));
+						-webkit-filter: drop-shadow(0px 0px 6px rgb(34, 255, 0));
+						filter: drop-shadow(0px 0px 6px rgb(34, 255, 0));
 					}
 				}
 			}
 			&:hover {
 				+ div.main__radiobtn--fake {
 					> .main__img {
-						-webkit-filter: drop-shadow(0px 0px 8px rgb(234, 0, 255));
-						filter: drop-shadow(0px 0px 8px rgb(234, 0, 255));
+						-webkit-filter: drop-shadow(0px 0px 6px rgb(0, 255, 251));
+						filter: drop-shadow(0px 0px 6px rgb(0, 255, 251));
+					
 					}
 				}
 			}
 			&:active {
 				+ div.main__radiobtn--fake {
 					> .main__img {
-						-webkit-filter: drop-shadow(0px 0px 8px rgb(0, 255, 251));
-						filter: drop-shadow(0px 0px 8px rgb(0, 255, 251));
+						-webkit-filter: drop-shadow(0px 0px 6px #00fffb);
+						filter: drop-shadow(0px 0px 6px rgb(0, 255, 251));
 					}
 				}
 			}
@@ -84,17 +85,8 @@
 			font-size: 1.1rem;
 		}
 	}
-	// &__button-start {
-	// 	width: 10%;
-	// 	@extend %flexJC;
-	// 	line-height: 20px;
-	// 	border: 1px solid #ddd;
-	// 	border-radius: 0.3rem;
-	// 	margin: 7% 1% 0 1%;
-	// 	font-size: 11px;
-	// 	&:focus{
-	// 		outline: none;
-	// 		box-shadow: 0px 0px 10px 2px rgb(0, 255, 251);
-	// 	}
-	// }
+	&__button-start {
+		  @extend %btn;
+		  margin: 10px;
+	}
 }

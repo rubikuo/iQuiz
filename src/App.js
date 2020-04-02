@@ -5,11 +5,9 @@ import About from "./Components/About";
 import Stats from "./Components/Stats";
 import Quiz from "./Components/Quiz";
 import {Container} from "react-bootstrap";
-import Header from "./Components/Header";
-import SidebarNav from './Components/SidebarNav';
-
-
-
+import MemoHeader from "./Components/Header";
+import MemoSidebar from './Components/SidebarNav';
+import MemoFooter from "./Components/Footer";
 import './App.css';
 
 function App() {
@@ -18,9 +16,9 @@ function App() {
 
   return (
     <div className="App">
-      <Header isOpen={isOpen} onClick={()=>setIsOpen(true)} />
-      <SidebarNav isOpen={isOpen} onClose={()=>setIsOpen(false)} />
-      <Container>
+      <MemoHeader isOpen={isOpen} onClick={()=>setIsOpen(true)} />
+      <MemoSidebar isOpen={isOpen} onClose={()=>setIsOpen(false)} />
+      <Container className="container">
       <Router>
   
         <Switch>
@@ -31,6 +29,7 @@ function App() {
         </Switch>
       </Router>
       </Container>
+      <MemoFooter />
     </div>
   );
 }

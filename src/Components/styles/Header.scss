@@ -1,19 +1,16 @@
 .header {
-    width: 100%;
-    background: transparent;
-    height: 10vh;
-    display: flex;
-    padding: 0 20px;
-    align-items: center;
-    &__button{
-     display: flex;
-     padding: 8px 10px;
-     border-radius: 5px;
-     line-height: 20px;
-     color: white;
-     background: rgb(42, 42, 101);
-    
-     
-
-    }
+	width: 100%;
+	background: transparent;
+	height: 10vh;
+	display: flex;
+	padding: 0 20px;
+	align-items: center;
+	&__button-menu {
+		display: flex;
+		padding: 8px 10px;
+		border-radius: 5px;
+		line-height: 20px;
+		color: white;
+		background: rgb(42, 42, 101);
+	}
 }

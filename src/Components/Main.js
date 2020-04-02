@@ -45,6 +45,7 @@ const Main = () => {
 	}
 
 	return (
+		<>
 		<div className="main">
 			<Helmet>
 				<title>Main</title>
@@ -65,13 +66,13 @@ const Main = () => {
 							/>
 							<div className="main__radiobtn--fake">
 								{cat.type === 'Books' ? (
-									<BookIcon size={150} className="main__img" />
+									<BookIcon size={120} className="main__img" />
 								) : cat.type === 'Music' ? (
-									<MusicIcon size={150} className="main__img" />
+									<MusicIcon size={120} className="main__img" />
 								) : cat.type === 'Video games' ? (
-									<GameIcon size={150} className="main__img" />
+									<GameIcon size={120} className="main__img" />
 								) : (
-									<MovieIcon size={150} className="main__img" />
+									<MovieIcon size={120} className="main__img" />
 								)}
 							</div>
 
@@ -87,6 +88,8 @@ const Main = () => {
 				Start
 			</Button>
 		</div>
+	
+		</>
 	);
 };
 

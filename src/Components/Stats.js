@@ -69,7 +69,7 @@ const Stats = () => {
 						);
 					})}
 				</div>
-				<div key="type" className="stats__progress">
+				<div className="stats__progress">
 					<CircularProgress
 					   
 						type="Correct Rate"

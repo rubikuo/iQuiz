@@ -1,10 +1,13 @@
+@import "./variables";
+
+
 .modal{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(225, 225, 225, 0.44);
+    background-color: rgba(187, 186, 186, 0.509);
     position: absolute;
     top:0;
     z-index: 9999999999999;
@@ -14,55 +17,117 @@
         left: 50%;
         transform: translate(-50%, -50%);
         padding: 4%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 450px;
-        height: 180px;
-        background-color: #fff;
+        @extend %flexCCC;
+        width: 520px;
+        height: 220px;
+        background-color: rgb(245, 245, 245);
         border-radius: 0.3rem;
+        box-shadow: 0px 0px 3px 3px rgb(65, 63, 63);
         >p {
-            font-size: 14px;
+            font-size: 1rem;
             text-align: left;
             line-height: 25px;
             margin: 0;
-            color: #737373;
+            color: rgb(58, 58, 58);
         }
     }
     &__headline{
         display: flex;
         >h5{
             margin: 0 0 20px 0;
-            color: #1293D6;
+            color: #0c0b45;
         }
     }
     &__button-ctn{
+        margin-top: 7%;
         display: flex;
         justify-content: flex-end;
     }
     &__button{
-        display: flex;
-        font-weight: 500;
-        background-color: rgb(245, 244, 244);
-        letter-spacing: 0.06rem;
-        border: 1px solid #ddd;
-        border-radius: 0.3rem;
-        padding: 2%;
-        margin: 7% 1% 0 1%;
-        font-size: 11px;
-        
-        &--blue{
-            color: #fff;
-            background-color: #1293D6;
-            border: 1px solid #1293D6;
-            margin-left: 5px;
-            &:hover{
-                background-color: #106BAC;
-            }
+        @extend %btn;
+        margin: 1%;
+
+       
+        // display: flex;
+        // font-weight: 500;
+        // background-color: rgb(245, 244, 244);
+        // letter-spacing: 0.06rem;
+        // border: 1px solid #ddd;
+        // border-radius: 0.3rem;
+        // padding: 2%;
+        // margin: 7% 1% 0 1%;
+        // font-size: 11px;
+        &-restart{
+            background-color: #D999DB;
+            border: 1px solid rgb(41, 41, 41);
         }
+        &-home{
+            background-color: #e5e79e;
+            border: 1px solid rgb(41, 41, 41);
+        }
+        &-stats{
+            background-color: #b9f0bd;
+            border: 1px solid rgb(41, 41, 41);
+            
+        }
+       
         &:hover{
             cursor: pointer;
         }
 
+    }
+}
+
+@media only screen and (max-width: 580px) {
+    .modal {
+        &__box{
+            width: 60%;
+            height: auto;
+        }
+       
+        &__button-ctn{
+            width: 100%;
+            flex-flow: column wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        &__button{
+            width: 90%;
+            order: 2;
+            text-align: center;
+            display: block;
+            padding: 10px 0;
+            margin-top: 10px;
+        }
+    }
+
+    .relocateCtn {
+        width: 100%;
+    }
+
+    .modalsButtonsContainer {
+        width: 100%;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .modalButtons {
+        width: 90%;
+        order: 2;
+        text-align: center;
+        display: block;
+        padding: 10px 0;
+        margin-top: 10px;
+    }
+
+    .modalButtons.blueButtons {
+        order: 1;
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .modalContainer > .modalBox > form > input {
+        height: 30px;
+        padding-left: 5px;
     }
 }

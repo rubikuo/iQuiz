@@ -6,14 +6,15 @@ import './styles/Quiz.scss';
 import { playTimes$, updatePlayTimes, correctNum$, updateCorrectNum, inCorrectNum$, updateInCorrectNum, correctPercent$, updateCorrectPercent } from "./store.js";
 import { TouchBallLoading } from 'react-loadingg';
 import { BookIcon, MusicIcon, GameIcon, MovieIcon } from './ImgIcon.jsx';
-import NewModal from "./NewModal";
 import Button from 'react-bootstrap/Button';
+import Modal from "./Modal";
+
 
 const Quiz = ({ location }) => {
 	const [datas, setDatas] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [dataPerPage, setDataPerpage] = useState(1);
+	const [dataPerPage] = useState(1);
 	const [checkedValue, setCheckedValue] = useState('');
 	const [correctAnswers, setCorrectAnswers] = useState([]);
 	const [point, setPoint] = useState(0);
@@ -213,13 +214,13 @@ const Quiz = ({ location }) => {
 		<div className="quiz">
 			{/* <h1 className="quiz__title">{catagoryType ==="music"}</h1> */}
 			<div className="quiz__icon-catagory">{catagoryType === 'Books' ? (
-									<BookIcon size={100} className="main__img" />
+									<BookIcon size={85} className="main__img" />
 								) : catagoryType === 'Music' ? (
-									<MusicIcon size={100} className="main__img" />
+									<MusicIcon size={85} className="main__img" />
 								) : catagoryType === 'Video games' ? (
-									<GameIcon size={100} className="main__img" />
+									<GameIcon size={85} className="main__img" />
 								) : (
-									<MovieIcon size={100} className="main__img" />
+									<MovieIcon size={85} className="main__img" />
 								)}</div>
 			<div className="quiz__container">
 				{loading ? (
@@ -285,12 +286,8 @@ const Quiz = ({ location }) => {
 					</>}
 
 				{currentPage === lastPage && <Button aria-label="View result" className="quiz__button-result" onClick={showResult}>Result</Button>}
-				<NewModal
-					show={showModal}
-					onRedirectStats={onRedirectStats} 
-					point={point} 
-					onRedirectHome={onRedirectHome} 
-					onRestart={onRestart}/>
+						 {showModal && <Modal showModal={showModal} onRedirectStats={onRedirectStats}  point={point} onRedirectHome={onRedirectHome} 
+					onRestart={onRestart} />}
 			</div>
 		</div>
 	);

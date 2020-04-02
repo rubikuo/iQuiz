@@ -46,4 +46,6 @@ const SidebarNav = ({ isOpen, onClose }) => {
 
 }
 
-export default SidebarNav;
+const MemoSidebar = React.memo(SidebarNav)
+
+export default MemoSidebar;

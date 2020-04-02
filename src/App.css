@@ -1,6 +1,7 @@
-.logo{
-  width: 50px;
-  height: 10px;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body{
@@ -9,12 +10,30 @@ body{
   box-sizing: border-box;
   height: 100vh;
   /* background: url("./materials/BgNoLOGO.svg") no-repeat; */
-  background: linear-gradient(0deg, rgba(230, 230, 230, 0.105), rgba(162, 162, 162, 0.036)),
+  background: linear-gradient(0deg, rgba(230, 230, 230, 0), rgba(162, 162, 162, 0)),
   url("./materials/BgNoLOGO.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
 
-    
+}
 
+.App{
+  height: 100vh;
+}
+
+.container {
+ height: 85vh;
+
+}
+
+footer {
+  height: 5vh;
+  color: white;
+  text-align: center;
+  background-color: transparent;
+}
+
+footer p {
+  margin: 0;
 }

@@ -8,7 +8,7 @@
 		padding: 2%;
 		font-size: 1.8rem;
 	}
-	&__icon-catagory{
+	&__icon-catagory {
 		@extend %flexJC;
 		padding: 5px 0;
 	}
@@ -32,8 +32,10 @@
 				font-size: 50px;
 				color: white;
 			}
-			&:focus, &:hover, &:active {
-				>.quiz__button-next--fake{
+			&:focus,
+			&:hover,
+			&:active {
+				> .quiz__button-next--fake {
 					color: rgb(0, 217, 255);
 				}
 			}
@@ -44,37 +46,36 @@
 				font-size: 50px;
 				color: white;
 			}
-			&:focus, &:hover, &active {
-				>.quiz__button-prev--fake{
+			&:focus,
+			&:hover,
+			&active {
+				> .quiz__button-prev--fake {
 					color: rgb(0, 217, 255);
 				}
-				
 			}
 		}
-		&:focus{
+		&:focus {
 			outline: none;
 		}
-		&-result{
-		width: 8rem;
-        text-align: center;
-        margin: 5%;
-        color: white;
-        text-decoration: none;
-		font-weight: 500;
-		margin: 2% 0 0 0;
-        &:hover{
-            text-decoration: none;
-            color: white;
-            font-weight: 700;
-          
-        }
+		&-result {
+			width: 8rem;
+			text-align: center;
+			margin: 5%;
+			color: white;
+			text-decoration: none;
+			font-weight: 500;
+			margin: 2% 0 0 0;
+			&:hover {
+				text-decoration: none;
+				color: white;
+				font-weight: 700;
+			}
 		}
 	}
 
 	&__section {
 		@extend %flexCCC;
 		width: 100%;
-
 	}
 	&__text-question {
 		padding: 2% 5%;
@@ -85,7 +86,9 @@
 		width: 70%;
 		text-align: left;
 		font-size: 1.2rem;
-	
+		&:focus {
+			// outline: none;
+		}
 	}
 	&__radiobtn {
 		width: 60%;
@@ -184,7 +187,6 @@
 			width: 80%;
 			font-size: 1rem;
 			font-weight: 500;
-	
 		}
 	}
 }

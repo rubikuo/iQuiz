@@ -38,6 +38,7 @@
 			}
 			&:focus {
 				+ div.main__radiobtn--fake {
+					
 					> .main__img {
 						-webkit-filter: drop-shadow(0px 0px 6px rgb(34, 255, 0));
 						filter: drop-shadow(0px 0px 6px rgb(34, 255, 0));
@@ -46,6 +47,7 @@
 			}
 			&:hover {
 				+ div.main__radiobtn--fake {
+					
 					> .main__img {
 						-webkit-filter: drop-shadow(0px 0px 6px rgb(0, 255, 251));
 						filter: drop-shadow(0px 0px 6px rgb(0, 255, 251));

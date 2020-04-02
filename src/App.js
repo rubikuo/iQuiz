@@ -20,7 +20,6 @@ function App() {
       <MemoSidebar isOpen={isOpen} onClose={()=>setIsOpen(false)} />
       <Container className="container">
       <Router>
-  
         <Switch>
           <Route exact path="/" component={Main} isOpen={isOpen}/>
           <Route path="/quiz" component={Quiz} />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import { Redirect } from "react-router-dom";
@@ -8,6 +8,7 @@ import { TouchBallLoading } from 'react-loadingg';
 import { BookIcon, MusicIcon, GameIcon, MovieIcon } from './ImgIcon.jsx';
 import Button from 'react-bootstrap/Button';
 import Modal from "./Modal";
+import { Helmet } from 'react-helmet';
 
 
 const Quiz = ({ location }) => {
@@ -27,9 +28,11 @@ const Quiz = ({ location }) => {
 	const [showModal, setShowModal] = useState(false);
 	const [answers, setAnswers] = useState([]);
 
+	let catagoryNum = location.state.catagory.catagoryNum;
+	// console.log(catagoryNum)
+	let catagoryType = location.state.catagory.type;
 
-
-	//connect to localstorage once it's loaded
+	//****** connect to localstorage once it's loaded ********//
 	useEffect(() => {
 
 		const subscriptions = [
@@ -51,28 +54,68 @@ const Quiz = ({ location }) => {
 	}, []);
 
 
-	let catagoryNum = location.state.catagory.catagoryNum;
-	console.log(catagoryNum)
-	let catagoryType = location.state.catagory.type;
+	//******** control focus items when it's loaded ****/
+	const questionRef = useRef(null);
+
+
+	let focusTime = useCallback(
+		() => {
+			setTimeout(() => {
+				if (!loading) {
+					questionRef.current.focus();
+				}
+
+			}, 1000)
+		},
+		[loading],
+	)
+
+	useEffect(() => {
+		focusTime()
+		return () => {
+			clearTimeout(focusTime)
+		}
+
+	}, [focusTime])
+
+
+	// const catagoryRef = useRef(null);
+	// let focusCat = useCallback(()=>{
+	//      catagoryRef.current.focus()
+
+	// }, [])
 
 
 
+	//********** */ loading icon * *********//
+	const loadingTime = useCallback(() => {
+
+		setTimeout(() => {
+			setLoading(false);
+		}, 3000)
+	}, [])
+
+
+	//************* fetching datas   ************* */
 	let url = `https://opentdb.com/api.php?amount=10&category=${catagoryNum}&difficulty=medium&type=multiple`;
+
+	useEffect(() => {
+		loadingTime();
+		return () => clearTimeout(loadingTime)
+	})
+
+
 
 	const getData = useCallback(
 		() => {
+
+			loadingTime();
 			let CancelToken = axios.CancelToken;
 			let source = CancelToken.source();
 			axios
 				.get(url)
 				.then((response) => {
-					setTimeout(() => {
-						setLoading(false);
-					}, 2000)
 					let datas = response.data.results;
-					return datas;
-				})
-				.then((datas) => {
 					let copyDatas = [...datas];
 					let reEditedDatas = [];
 					let allCorrectAnswers = [];
@@ -96,10 +139,11 @@ const Quiz = ({ location }) => {
 			return () => source.cancel();
 		},
 
-		[url]
+		[url, loadingTime]
 	);
 
 	useEffect(() => {
+
 		getData();
 	}, [getData]);
 
@@ -135,9 +179,10 @@ const Quiz = ({ location }) => {
 			setCurrentPage(currentPage + 1)
 			setCheckedValue(answers[currentPage])
 		}
+		focusTime();
 	}
 
-	console.log( "correctAnswers",correctAnswers)
+	console.log("correctAnswers", correctAnswers)
 
 
 	const showResult = () => {
@@ -176,9 +221,9 @@ const Quiz = ({ location }) => {
 
 	console.log("playTime", playTimes$.value)
 
-// eventlistener's functions for buttons on Modal
+	//********** */ eventlistener's functions for buttons on Modal **********//
 
-	const onRestart = () =>{
+	const onRestart = () => {
 		setShowModal(false);
 		setCurrentPage(1);
 		setAnswers([]);
@@ -191,7 +236,7 @@ const Quiz = ({ location }) => {
 		setShowModal(false)
 		setRedirectStats(true)
 	}
-	
+
 	const onRedirectHome = () => {
 		setShowModal(false)
 		setRedirectHome(true)
@@ -211,20 +256,24 @@ const Quiz = ({ location }) => {
 
 	return (
 
-		<div className="quiz">
-			{/* <h1 className="quiz__title">{catagoryType ==="music"}</h1> */}
-			<div className="quiz__icon-catagory">{catagoryType === 'Books' ? (
-									<BookIcon size={85} className="main__img" />
-								) : catagoryType === 'Music' ? (
-									<MusicIcon size={85} className="main__img" />
-								) : catagoryType === 'Video games' ? (
-									<GameIcon size={85} className="main__img" />
-								) : (
-									<MovieIcon size={85} className="main__img" />
-								)}</div>
+		<main className="quiz">
+			<Helmet>
+				<title>iQuiz-{catagoryType}</title>
+			</Helmet>
+
+			<figure className="quiz__icon-catagory" role="region" aria-label={catagoryType} tabIndex={0}>{catagoryType === 'Books' ? (
+				<BookIcon size={85} className="main__img" />
+			) : catagoryType === 'Music' ? (
+				<MusicIcon size={85} className="main__img" />
+			) : catagoryType === 'Video games' ? (
+				<GameIcon size={85} className="main__img" />
+			) : (
+							<MovieIcon size={85} className="main__img" />
+						)}
+			</figure>
 			<div className="quiz__container">
 				{loading ? (
-					<TouchBallLoading role="alert" aria-busy="true" style={{height: "18rem"}} />
+					<TouchBallLoading role="alert" aria-busy="true" style={{ height: "18rem" }} />
 
 				) : (
 						currentDatas.map((data, index) => {
@@ -242,7 +291,7 @@ const Quiz = ({ location }) => {
 							return (
 
 								<section className="quiz__section" key={data.question}>
-									<h3 className="quiz__text-question">
+									<h3 className="quiz__text-question" ref={questionRef} tabIndex={0}>
 										{currentPage + "."} {data.question.replace(/&#?\w+;/g, (match) => entities[match])}
 									</h3>
 
@@ -276,20 +325,21 @@ const Quiz = ({ location }) => {
 
 				{loading ? null :
 					<>
+						{currentPage === lastPage ? null :
+							<button aria-label="Next" onClick={checkedValue ? toNext : null} className="quiz__button quiz__button-next"> <MdNavigateNext className="quiz__button-next--fake" /> </button>
+						}
 						{currentPage === 1 ? null :
 							<button aria-label="Previous" onClick={toPrev} className="quiz__button quiz__button-prev"><MdNavigateBefore className="quiz__button-prev--fake" /></button>
 						}
 
-						{currentPage === lastPage ? null :
-							<button aria-label="Next" onClick={checkedValue ? toNext : null} className="quiz__button quiz__button-next"> <MdNavigateNext className="quiz__button-next--fake" /> </button>
-						}
+
 					</>}
 
 				{currentPage === lastPage && <Button aria-label="View result" className="quiz__button-result" onClick={showResult}>Result</Button>}
-						 {showModal && <Modal showModal={showModal} onRedirectStats={onRedirectStats}  point={point} onRedirectHome={onRedirectHome} 
+				{showModal && <Modal showModal={showModal} onRedirectStats={onRedirectStats} point={point} onRedirectHome={onRedirectHome}
 					onRestart={onRestart} />}
 			</div>
-		</div>
+		</main>
 	);
 };
 

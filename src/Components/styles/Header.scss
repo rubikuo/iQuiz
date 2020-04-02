@@ -12,5 +12,11 @@
 		line-height: 20px;
 		color: white;
 		background: rgb(42, 42, 101);
+		&:hover {
+			border: 1px solid blue;
+		}
+		&:focus{
+			border: 1px solid blue;
+		}
 	}
 }

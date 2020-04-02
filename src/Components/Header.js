@@ -6,11 +6,9 @@ import { MdMenu } from 'react-icons/md';
 const Header = ({ onClick }) => {
 	return (
 		<header className="header">
-			<div>
-				<button aria-label="menu" onClick={onClick} className="header__button-menu">
+				<button  aria-label="menu"  onClick={onClick} className="header__button-menu">
 					<MdMenu className="header__icon--Menu" />
 				</button>
-			</div>
 		</header>
 	);
 };

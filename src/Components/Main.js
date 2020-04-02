@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useRef, useEffect} from 'react';
 import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 import './styles/Main.scss';
@@ -16,7 +16,7 @@ const Main = () => {
 	const [ choice, setChoice ] = useState(null);
 	const [ redirectToQuiz, setRedirectToQuiz ] = useState(false);
 	const [ message, setMessage ] = useState('');
-
+   
 	const startQuiz = (e) => {
 		console.log(choice);
 		if (choice !== null) {
@@ -30,8 +30,13 @@ const Main = () => {
 	const chooseCat = (catagory)=>{
 		setChoice(catagory);
 		setMessage("")
-
 	}
+
+	const catagoryRef = useRef(null)
+
+	useEffect(()=>{
+
+	})
 
 	if (redirectToQuiz) {
 		return (
@@ -46,16 +51,18 @@ const Main = () => {
 
 	return (
 		<>
-		<div className="main">
+		<main className="main">
 			<Helmet>
-				<title>Main</title>
+				<title>iQuiz-Home</title>
 			</Helmet>
-			<div className="main__radiobtn-group">
+			{/* <h3 style={{color:"white"}}  aria-live="assertive" aria-label="Please choose catatgory" tabIndex={0} id="catagory">Please choose catagory:</h3> */}
+			<div role="radiogroup" aria-label="Please choose catatgory"  tabIndex={0} className="main__radiobtn-group">
+			
 				{catagories.map((cat, i) => {
 					return (
 						<label htmlFor={cat.type + i} className="main__radiobtn" key={cat.type}>
 							<input
-								aria-labelledby={cat.type}
+							    
 								type="radio"
 								className="main__radiobtn-input"
 								name="catagory"
@@ -66,28 +73,28 @@ const Main = () => {
 							/>
 							<div className="main__radiobtn--fake">
 								{cat.type === 'Books' ? (
-									<BookIcon size={120} className="main__img" />
+									<BookIcon size={120}  	aria-labelledby={cat.type} 	className="main__img" />
 								) : cat.type === 'Music' ? (
-									<MusicIcon size={120} className="main__img" />
+									<MusicIcon size={120} 	aria-labelledby={cat.type} className="main__img" />
 								) : cat.type === 'Video games' ? (
-									<GameIcon size={120} className="main__img" />
+									<GameIcon size={120}  	aria-labelledby={cat.type} className="main__img" />
 								) : (
-									<MovieIcon size={120} className="main__img" />
+									<MovieIcon size={120} 	aria-labelledby={cat.type} className="main__img" />
 								)}
 							</div>
 
-							<span id={cat.type} className="main__radiobtn-option">
+							<div id={cat.type} className="main__radiobtn-option">
 								{cat.type}
-							</span>
+							</div>
 						</label>
 					);
 				})}
 			</div>
-			{message !== '' && <span role="alert">{message}</span>}
+			{message !== '' && <span role="alert" aria-live="assertive" >{message}</span>}
 			<Button aria-label="Start Game" className="main__button-start" onClick={startQuiz}>
 				Start
 			</Button>
-		</div>
+		</main>
 	
 		</>
 	);

@@ -26,6 +26,7 @@ const Modal = ({ onRedirectHome, onRedirectStats, onRestart, point, showModal}) 
 						role="dialog"
 						aria-labelledby="dialogTitle"
 						aria-describedby="dialogDesc"
+						aria-hidden={!showModal}
 						className="modal__headline"
 					>
 						<h5 id="dialogTitle"> {message} </h5>

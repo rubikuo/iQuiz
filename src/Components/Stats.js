@@ -51,7 +51,7 @@ const Stats = () => {
 
 	return (
 		<div className="stats">
-			<session className="stats__session">
+			<section className="stats__session">
 				<div className="stats__session-wrap">
 					{statsType.map((type) => {
 							let progressValue = 
@@ -60,7 +60,7 @@ const Stats = () => {
 							type ==="Incorrects"? inCorrectNum === null? 0: inCorrectNum:
 							correctPercent=== null? 0:correctPercent;
 						return (
-							<div key="type" className="stats__session-ctn">
+							<div key={type} className="stats__session-ctn">
 								<p className="stats__session--text">
 									<strong>{progressValue}</strong> {type === 'correctRate' && <span>%</span>}
 								</p>
@@ -79,7 +79,7 @@ const Stats = () => {
 						inCorrectNum={inCorrectNum}
 					/>
 				</div>
-			</session>
+			</section>
 			<div className="stats__container-btn">
 			<Button className="stats__button stats__button-reset" onClick={resetStats}>
 				Reset

@@ -126,7 +126,7 @@ const Quiz = ({ location }) => {
 					copyDatas.map((data) => {
 						let allAnswers = [...data.incorrect_answers, data.correct_answer];
 						allCorrectAnswers.push(data.correct_answer)
-						// console.log(allAnswers);
+						console.log("allAnswers");
 						let shuffledArr = shuffle(allAnswers);
 						let newDatas = {
 							options: shuffledArr,
@@ -192,7 +192,8 @@ const Quiz = ({ location }) => {
 		
 	}
 
-	// console.log("correctAnswers", correctAnswers)
+	console.log("correctAnswers", correctAnswers)
+	console.log("answers", answers)
 
 
 	const promise = ()=>{
@@ -215,7 +216,9 @@ const Quiz = ({ location }) => {
 	}
 	
 	const showResult = () => {
-		
+		let copyAnswers = [...answers];
+		copyAnswers.splice(currentPage - 1, 1, checkedValue); //target current value in the array(the reason with currentpage -1 is the currentpage starts with 1), remove only this one, and replace with new value
+		setAnswers(copyAnswers);
 		updatePlayTimes(playTimes + 1)
 		checkPoints(answers)
 		setShowModal(true)
@@ -249,7 +252,7 @@ const Quiz = ({ location }) => {
 	}
 
 
-	console.log("playTime", playTimes)
+	// console.log("playTime", playTimes)
 
 	//********** */ eventlistener's functions for buttons on Modal **********//
 

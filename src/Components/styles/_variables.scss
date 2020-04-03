@@ -30,19 +30,29 @@
 
 }
 
+%font-SW7{
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+
 
 %btn{
 	width: 8rem;
 	text-align: center;
 	margin: 5%;
-
 	color: #0c0b45;
 	text-decoration: none;
-	font-weight: 600;
+    @extend %font-SW7;
+	font-size: 1rem;
+	border-color: none;
 	&:hover{
+		background-color: #0055B8;
 		text-decoration: none;
-		color: white;
-		font-weight: 700; 
+		color: white; 
+		font-size: 1.1rem;
+	}
+	&:focus{
+		box-shadow: 0px 0px 3px 3px white;
 	}
 	
 }

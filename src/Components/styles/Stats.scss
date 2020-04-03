@@ -33,9 +33,12 @@
             font-size: 2rem;
             margin: -5px 0 1px 0;
             padding: 0 10%;
+
             &-sub{
+                font-size: 1.1rem;
                 color:  white;
                 padding: 0 10%;
+                @extend %font-SW7;
             }
 
         }
@@ -50,7 +53,9 @@
             margin: -5px 0 1px 0;
          
             &-sub{
+                font-size: 1.1rem;
                 color:  white;
+                @extend %font-SW7;
             }
 
         }
@@ -63,7 +68,17 @@
     }
     
     &__button{
-      @extend %btn;
+        @extend %btn;
+		margin-top: 3%;
+        border: 1px solid rgb(41, 41, 41);
+        &-home{
+            background-color: #e5e79e;
+            border: 1px solid rgb(41, 41, 41);
+        }
+        &-reset{
+            background-color: #e79e9e;
+            border: 1px solid rgb(41, 41, 41);
+        }
         
     }
 }

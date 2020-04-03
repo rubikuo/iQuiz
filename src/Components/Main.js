@@ -32,11 +32,6 @@ const Main = () => {
 		setMessage("")
 	}
 
-	const catagoryRef = useRef(null)
-
-	useEffect(()=>{
-
-	})
 
 	if (redirectToQuiz) {
 		return (
@@ -55,7 +50,7 @@ const Main = () => {
 			<Helmet>
 				<title>iQuiz-Home</title>
 			</Helmet>
-			{/* <h3 style={{color:"white"}}  aria-live="assertive" aria-label="Please choose catatgory" tabIndex={0} id="catagory">Please choose catagory:</h3> */}
+
 			<div role="radiogroup" aria-label="Please choose catatgory"  tabIndex={0} className="main__radiobtn-group">
 			
 				{catagories.map((cat, i) => {
@@ -73,27 +68,28 @@ const Main = () => {
 							/>
 							<div className="main__radiobtn--fake">
 								{cat.type === 'Books' ? (
-									<BookIcon size={120}  	aria-labelledby={cat.type} 	className="main__img" />
+									<BookIcon size={130}  	aria-labelledby={cat.type} 	className="main__img" />
 								) : cat.type === 'Music' ? (
-									<MusicIcon size={120} 	aria-labelledby={cat.type} className="main__img" />
+									<MusicIcon size={130} 	aria-labelledby={cat.type} className="main__img" />
 								) : cat.type === 'Video games' ? (
-									<GameIcon size={120}  	aria-labelledby={cat.type} className="main__img" />
+									<GameIcon size={130}  	aria-labelledby={cat.type} className="main__img" />
 								) : (
-									<MovieIcon size={120} 	aria-labelledby={cat.type} className="main__img" />
+									<MovieIcon size={130} 	aria-labelledby={cat.type} className="main__img" />
 								)}
 							</div>
 
-							<div id={cat.type} className="main__radiobtn-option">
+							<p id={cat.type} className="main__radiobtn-option">
 								{cat.type}
-							</div>
+							</p>
 						</label>
 					);
 				})}
 			</div>
-			{message !== '' && <span role="alert" aria-live="assertive" >{message}</span>}
+			
 			<Button aria-label="Start Game" className="main__button-start" onClick={startQuiz}>
 				Start
 			</Button>
+			{message !== '' && <span role="alert" aria-live="assertive" className="main__text-alert" >{message}</span>}
 		</main>
 	
 		</>

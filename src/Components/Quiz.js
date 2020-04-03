@@ -29,6 +29,7 @@ const Quiz = ({ location }) => {
 	const [answers, setAnswers] = useState([]);
 	const [message, setMessage] = useState("");
 
+
 	let catagoryNum = location.state.catagory.catagoryNum;
 	// console.log(catagoryNum)
 	let catagoryType = location.state.catagory.type;
@@ -78,11 +79,7 @@ const Quiz = ({ location }) => {
 	}, [focusTime])
 
 
-	// const catagoryRef = useRef(null);
-	// let focusCat = useCallback(()=>{
-	//      catagoryRef.current.focus()
-
-	// }, [])
+   
 	 
 	const firstAnswerRef = useRef(null);
 	let focusFirstAnswer = () =>{
@@ -97,6 +94,10 @@ const Quiz = ({ location }) => {
 			setLoading(false);
 		}, 3000)
 	}, [])
+   
+
+
+
 
 
 	//************* fetching datas   ************* */
@@ -164,16 +165,21 @@ const Quiz = ({ location }) => {
 		}
 		return shuffled;
 	};
-
+    // *************************
 	const indexOfLastData = currentPage * dataPerPage;
 	const indexOfFirstData = indexOfLastData - dataPerPage;
 	const currentDatas = datas.slice(indexOfFirstData, indexOfLastData);
 	const lastPage = Math.ceil(datas.length / dataPerPage);
 
+	//************************* */
+
+
 	const handleRadioBtn = (e) => {
 		setCheckedValue(e.target.value);
 		setMessage("")
+		
 	};
+					
 
 	const toNext = () => {
 		// console.log(checkedValue)
@@ -208,7 +214,7 @@ const Quiz = ({ location }) => {
 	
    // control focus to target back onto the first item of answer after showing message //
     const showMessage =()=>{
-		setMessage("Please choose message")
+		setMessage("Please choose answer")
 		promise()
 		.then(()=>{
 			setMessage("")
@@ -287,6 +293,9 @@ const Quiz = ({ location }) => {
 		}} />
 	}
 
+
+
+
 	return (
 
 		<main className="quiz">
@@ -294,14 +303,14 @@ const Quiz = ({ location }) => {
 				<title>iQuiz-{catagoryType}</title>
 			</Helmet>
 
-			<figure className="quiz__icon-catagory" role="region" aria-label={catagoryType} tabIndex={0}>{catagoryType === 'Books' ? (
-				<BookIcon size={85} className="main__img" />
+			<figure className="quiz__icon-catagory" role="region" aria-label={`${catagoryType} quiz`} tabIndex={0}>{catagoryType === 'Books' ? (
+				<BookIcon size={85} className="quiz__img" />
 			) : catagoryType === 'Music' ? (
-				<MusicIcon size={85} className="main__img" />
+				<MusicIcon size={85} className="quiz__img" />
 			) : catagoryType === 'Video games' ? (
-				<GameIcon size={85} className="main__img" />
+				<GameIcon size={85} className="quiz__img" />
 			) : (
-							<MovieIcon size={85} className="main__img" />
+							<MovieIcon size={85} className="quiz__img" />
 						)}
 			</figure>
 			<div className="quiz__container">
@@ -329,9 +338,12 @@ const Quiz = ({ location }) => {
 									</h3>
 
 									{data.options.map((opt, i) => {
+											/***label style */
+				
 										return (
-
-											<label htmlFor={opt + i} className="quiz__radiobtn" key={opt}>
+                                           
+	                             
+											<label htmlFor={opt + i} className="quiz__radiobtn" key={opt} >
 												<input
 												    ref={i=== 0? firstAnswerRef:null}
 													aria-labelledby={opt}
@@ -342,6 +354,7 @@ const Quiz = ({ location }) => {
 													value={opt}
 													onChange={handleRadioBtn}
 													checked={checkedValue === opt}
+						
 												/>
 												<span className="quiz__radiobtn--fake" />
 												<span id={opt} className="quiz__radiobtn-option">
@@ -368,7 +381,7 @@ const Quiz = ({ location }) => {
 
 
 					</>}
-                {message!=="" && <p style={{color:"white"}} role="alert" aria-live="assertive">{message}</p>}
+                {message!=="" && <p role="alert" aria-live="assertive" className="quiz__text-alert">{message}</p>}
 				{currentPage === lastPage && <Button aria-label="View result" className="quiz__button-result" onClick={checkedValue ?showResult : showMessage}>Result</Button>}
 				{showModal && <Modal showModal={showModal} onRedirectStats={onRedirectStats} point={point} onRedirectHome={onRedirectHome}
 					onRestart={onRestart} />}

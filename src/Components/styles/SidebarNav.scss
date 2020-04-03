@@ -56,22 +56,20 @@
             margin: 1% 0px;
             width: 100%;
             display: inline-block;
-            &:hover, &:focus{
-                background-color: #414040b3;
-               
-            }
         }
         &-link{
             width: 100%;
             display: inline-block;
             text-decoration: none;
-            padding: 2% 10%;
+            padding: 3% 10%;
             color: rgb(235, 235, 235);
-            font-size: 30px;
+            font-size: 1.9rem;
             text-align: center;
+            font-weight: 700;
             &:hover, &:focus{
                 text-decoration: none;
-                color: #58D1E4;
+                background-color:#0053B3;
+                color: white;
             }
 
         }

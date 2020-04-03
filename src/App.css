@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 body{
@@ -18,6 +19,7 @@ body{
 
 .App{
   height: 100vh;
+  font-family: 'Comic Neue', cursive;
 }
 
 .container {
@@ -27,7 +29,7 @@ body{
 
 footer {
   height: 5vh;
-  color: white;
+  color: rgb(210, 210, 210);
   text-align: center;
   background-color: transparent;
 }

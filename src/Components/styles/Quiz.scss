@@ -11,6 +11,9 @@
 	&__icon-catagory {
 		@extend %flexJC;
 		padding: 5px 0;
+		&:focus {
+			outline: none;
+		}
 	}
 	&__container {
 		width: 100%;
@@ -29,7 +32,7 @@
 		&-next {
 			right: 5%;
 			&--fake {
-				font-size: 50px;
+				font-size: 60px;
 				color: white;
 			}
 			&:focus,
@@ -43,12 +46,12 @@
 		&-prev {
 			left: 5%;
 			&--fake {
-				font-size: 50px;
+				font-size: 60px;
 				color: white;
 			}
 			&:focus,
 			&:hover,
-			&active {
+			&:active {
 				> .quiz__button-prev--fake {
 					color: rgb(0, 217, 255);
 				}
@@ -58,18 +61,11 @@
 			outline: none;
 		}
 		&-result {
-			width: 8rem;
-			text-align: center;
-			margin: 5%;
-			color: white;
-			text-decoration: none;
-			font-weight: 500;
-			margin: 2% 0 0 0;
-			&:hover {
-				text-decoration: none;
-				color: white;
-				font-weight: 700;
-			}
+			@extend %btn;
+			margin: 1%;
+
+			background-color: #a09ddc;
+			border: 1px solid rgb(41, 41, 41);
 		}
 	}
 
@@ -85,21 +81,24 @@
 		hyphens: auto;
 		width: 70%;
 		text-align: left;
-		font-size: 1.2rem;
+		font-size: 1.4rem;
+		@extend %font-SW7;
 		&:focus {
-			// outline: none;
+			outline: none;
 		}
 	}
 	&__radiobtn {
 		width: 60%;
 		display: flex;
 		align-items: center;
-		border: 1px solid white;
+		border: 1px rgb(182, 182, 182);
+		border-style: dotted solid;
 		padding: 2%;
 		border-radius: 10px;
 		overflow-wrap: break-word;
 		word-wrap: break-word;
 		hyphens: auto;
+
 		&-input {
 			border: 0;
 			padding: 0;
@@ -111,17 +110,25 @@
 			overflow: hidden;
 			&:checked {
 				+ span.quiz__radiobtn--fake {
-					border-color: #6200eeff;
+					// border-color: #6200eeff;
 					&::after {
-						background: #6200eeff;
+						background: rgb(107, 1, 255);
 						opacity: 1;
 					}
+					&::before {
+						// background-color: rgba(0, 251, 255, 0.44);
+						opacity: 1;
+					}
+				}
+				~ span.quiz__radiobtn-option {
+					color: #00fffb;
+					font-weight: 700;
 				}
 			}
 			&:focus {
 				+ span.quiz__radiobtn--fake {
 					&::before {
-						background-color: rgba(93, 195, 213, 0.481);
+						// background-color: rgba(0, 251, 255, 0.44);
 						opacity: 1;
 					}
 				}
@@ -129,7 +136,7 @@
 			&:hover {
 				+ span.quiz__radiobtn--fake {
 					&::before {
-						background-color: rgba(93, 195, 213, 0.481);
+						// background-color: rgba(0, 251, 255, 0.44);
 						opacity: 1;
 					}
 				}
@@ -137,7 +144,7 @@
 			&:active {
 				+ span.quiz__radiobtn--fake {
 					::before {
-						background-color: rgba(99, 0, 238, 0.25);
+						// background-color: rgba(0, 251, 255, 0.44);
 						opacity: 1;
 					}
 				}
@@ -179,14 +186,57 @@
 				top: 50%;
 				transform: translate(-50%, -50%);
 				position: absolute;
-				background-color: rgba(72, 35, 219, 0.15);
+				background-color: rgba(231, 251, 254, 0.434);
 			}
 		}
 		&-option {
 			margin-left: 20px;
 			width: 80%;
+			font-size: 1.2rem;
+			font-weight: 400;
+			letter-spacing: 1px;
+		}
+	}
+	&__text-alert {
+		color: #00fffb;
+		letter-spacing: 1px;
+		font-size: 1.2rem;
+		font-weight: 700;
+	}
+}
+
+@media only screen and (max-width: 375px) {
+	.quiz {
+		&__icon-catagory {
+			margin-top: -10px;
+			margin: 0;
+			padding: 0;
+		}
+		&__img {
+			width: 60px;
+		
+		}
+		&__button {
+			&-next,
+			&-prev {
+				&--fake {
+					font-size: 40px;
+				}
+			}
+		}
+		&__radiobtn {
+			width: 60%;
+			&-option{
+				font-size: 0.8rem;
+				letter-spacing: 0;
+			}
+		}
+		
+		&__container {
+			height: 70%;
+		}
+		&__text-question {
 			font-size: 1rem;
-			font-weight: 500;
 		}
 	}
 }

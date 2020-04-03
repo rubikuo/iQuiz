@@ -32,17 +32,17 @@ const Modal = ({ onRedirectHome, onRedirectStats, onRestart, point, showModal}) 
 						<h5 tabIndex={0} id="dialogTitle"> {message} </h5>
 					</div>
 
-					<p id="dialogDesc">Your have {point}/10 questions correct!</p>
+					<p id="dialogDesc">You have <span>{point}</span> / 10 questions correct!</p>
 
 					<div className="modal__button-ctn">
-						<Button aria-label="restart" className="modal__button modal__button-restart" onClick={onRestart}>
+						<Button aria-label="restart the game" className="modal__button modal__button-restart" onClick={onRestart}>
 							Restart
 						</Button>
 
-						<Button aria-label="home" className="modal__button modal__button-home" onClick={onRedirectHome}>
+						<Button aria-label="return homepage" className="modal__button modal__button-home" onClick={onRedirectHome}>
 							Home
 						</Button>
-						<Button aria-label="View Stats" className="modal__button modal__button-stats" onClick={onRedirectStats}>
+						<Button aria-label="view stats" className="modal__button modal__button-stats" onClick={onRedirectStats}>
 							View Stats
 						</Button>
             

@@ -1,0 +1,42 @@
+@import "./variables";
+.about {
+	height: 100%;
+    position: relative;
+    @extend %flexRCC;
+	&__circle {
+		position: absolute;
+		z-index: -1;
+		top: 30px;
+		left: 20px;
+		width: 200px;
+		height: 200px;
+		border-radius: 50%;
+		background: rgb(248, 255, 0);
+		background: linear-gradient(
+			338deg,
+			rgba(248, 255, 0, 0.9682247899159664) 17%,
+			rgba(255, 253, 146, 1) 62%,
+			rgba(255, 245, 141, 1) 94%
+		);
+	
+    }
+    &__article{
+        @extend %flexCCC;
+        width: 60%;
+        margin-left: 15%;
+        color: #fcfcfc;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        &--content {
+       
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        &--textDeco{
+            font-size: 1.7rem;
+        }
+    }
+   
+}

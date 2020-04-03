@@ -13,6 +13,7 @@ import './styles/Stats.scss';
 import Button from 'react-bootstrap/Button';
 import 'react-circular-progressbar/dist/styles.css';
 import CircularProgress from './CircularProgress';
+import { Helmet } from 'react-helmet';
 
 const Stats = () => {
 	const [ playTimes, setPlayTimes ] = useState(playTimes$.value);
@@ -20,6 +21,7 @@ const Stats = () => {
 	const [ inCorrectNum, setInCorrectNum ] = useState(inCorrectNum$.value);
 	const [ correctPercent, setCorrectPercent ] = useState(correctPercent$.value);
 	const [ statsType ] = useState([ 'Play Times', 'Corrects', 'Incorrects' ]);
+	const [showModal, setShowModal] = useState(false)
 
 	const resetStats = () => {
 		updatePlayTimes(null); //confirm with Andreas why i need to render the page again to see the updated number?
@@ -50,7 +52,10 @@ const Stats = () => {
 
 
 	return (
-		<div className="stats">
+		<main className="stats">
+			<Helmet>
+				<title>iQuiz-Stats</title>
+			</Helmet>
 			<section className="stats__session">
 				<div className="stats__session-wrap">
 					{statsType.map((type) => {
@@ -71,7 +76,6 @@ const Stats = () => {
 				</div>
 				<div className="stats__progress">
 					<CircularProgress
-					   
 						type="Correct Rate"
 						correctPercent={correctPercent}
 						playTimes={playTimes}
@@ -86,7 +90,7 @@ const Stats = () => {
 			</Button>
 			<Button  className="stats__button stats__button-home" href="/">Home</Button>
 			</div>
-		</div>
+		</main>
 	);
 };
 export default Stats;

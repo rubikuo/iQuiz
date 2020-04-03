@@ -1,7 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import './styles/About.scss';
-import Logo from "../Logo";
+// import Logo from "../Logo";
+import iQuizlogo from"../materials/iQuiz-Logo.svg";
 
 const About = () => {
 	return (
@@ -11,7 +12,7 @@ const About = () => {
 			</Helmet>
 			<div className="about__circle" />
             <div>
-            <Logo className="about__icon-logo" role="img" aria-label="Welcome to iQuiz" tabIndex={0}/>
+            <img src={iQuizlogo} className="about__icon-logo" role="image" alt="iQuiz Logo" aria-label="About iQuiz" tabIndex={0}/>
             </div>
 			<article  className="about__article"  tabIndex={0}>
 				<p className="about__article--content">

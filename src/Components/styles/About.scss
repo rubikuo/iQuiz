@@ -23,7 +23,7 @@
     &__article{
         @extend %flexCCC;
         width: 60%;
-        margin-left: 15%;
+        margin-left: 20%;
         color: #fcfcfc;
         font-size: 1.2rem;
         font-weight: 700;
@@ -37,6 +37,54 @@
         &--textDeco{
             font-size: 1.7rem;
         }
+        &--link{
+            color:#00FFFB;
+          
+        }
     }
    
+}
+
+@media only screen and (max-width: 1000px) {
+    .about{
+        &__circle{
+            width: 150px;
+            height: 150px;
+            top: 0px;
+            left: 10px;
+        }
+        &__article{
+            margin-left: 0;
+            margin-top: 9%;
+            padding: 20px;
+            width: 100%;
+            font-size:1.1rem;
+            &--content{
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .about{
+        &__circle{
+            width: 110px;
+            height: 110px;
+            top: 0px;
+            left: 10px;
+        }
+        &__article{
+            margin-left: 0;
+            margin-top: 10%;
+            padding: 20px;
+            width: 100%;
+            font-size:1rem;
+            &--content{
+                font-size: 1rem;
+            }
+        }
+    }
+
 }

@@ -18,8 +18,8 @@ const About = () => {
 				<p>
 					Website's SVG background image as well as Logo icon created in Illustrator are original.
 					Images/Icons in the home page and quiz page are licensed and contributed from sources as below:<br />
-					Icon made by <a href="https://www.flaticon.com/authors/freepik">Freepik</a>  from <a href="www.flaticon.com"> www.flaticon.com</a> <br />
-					Icon made by <a href="https://www.flaticon.com/authors/smashicons"> Smashicons</a> from <a href="www.flaticon.com"> www.flaticon.com</a>
+					Icon made by <a className="about__article--link" href="https://www.flaticon.com/authors/freepik">Freepik</a>  from <a className="about__article--link"  href="www.flaticon.com"> www.flaticon.com</a> <br />
+					Icon made by <a className="about__article--link" href="https://www.flaticon.com/authors/smashicons"> Smashicons</a> from <a className="about__article--link"  href="www.flaticon.com"> www.flaticon.com</a>
 				</p>
 			</article>
 		</main>

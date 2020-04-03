@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import './styles/About.scss';
+import Logo from "../Logo";
 
 const About = () => {
 	return (
@@ -9,7 +10,9 @@ const About = () => {
 				<title>About iQuiz</title>
 			</Helmet>
 			<div className="about__circle" />
-		
+            <div>
+            <Logo className="about__icon-logo" role="img" aria-label="Welcome to iQuiz" tabIndex={0}/>
+            </div>
 			<article  className="about__article"  tabIndex={0}>
 				<p className="about__article--content">
 					<span className="about__article--textDeco">iQuiz</span> is created with ReactJS and developed based

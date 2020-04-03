@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-const Logo = ({className, width, height}) => {
+const Logo = ({className, width, height, role}) => {
 	return (
 		<svg
 			version="1.1"
@@ -16,6 +16,8 @@ const Logo = ({className, width, height}) => {
 			enableBackground="new 0 0 288 144"
 			xmlSpace="preserve"
 			className={className}
+			role={role}
+			aria-label = "Welcome to iQuiz"
 		>
 			<font horizAdvX="2048">
 				<font-face
@@ -71,6 +73,7 @@ Logo.defaultProps = {
 	width: 288,
     height: 144,
 	className: 'logo',
+	role:"img"
 };
 
 

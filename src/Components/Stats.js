@@ -26,7 +26,8 @@ const Stats = () => {
 
 	const showWarning = (e) =>{
 		setShowModal(true)
-        e.target.blur();
+		e.target.blur();
+	     focusOnHome();
 
 	}
 	
@@ -40,6 +41,7 @@ const Stats = () => {
 	};
 
 	const closeModal = () =>{
+	
 		setShowModal(false);
 		focusOnHome();
 	}

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import './styles/Modal.scss';
 import Button from 'react-bootstrap/Button';
 
-const Modal = ({ onRedirectHome, onRedirectStats, onRestart, point, showModal }) => {
+const Modal = ({ onRedirectHome, onRedirectStats, onRestart, point, showModal, type, resetStats, onClose }) => {
 	let message;
 	if (point === 0) {
 		message = 'Ooops..';
@@ -29,40 +29,54 @@ const Modal = ({ onRedirectHome, onRedirectStats, onRestart, point, showModal })
 						aria-hidden={!showModal}
 						className="modal__headline"
 					>
-						<h5 tabIndex={0} id="dialogTitle">
-							{' '}
-							{message}{' '}
-						</h5>
+						
+					{type === 'result' ?<h5 tabIndex={0} id="dialogTitle"> message	</h5> : <h5 tabIndex={0} id="dialogTitle" className="modal__text-warning">Warning</h5>}
+					
 					</div>
 
-					<p id="dialogDesc">
-						You have <span>{point}</span> / 10 questions correct!
-					</p>
+					{type === 'result' ? (
+						<p id="dialogDesc">
+							You have <span>{point}</span> / 10 questions correct!
+						</p>
+					) : (
+						<p id="dialogDesc">Are you sure to reset stats to 0?</p>
+					)}
 
-					<div className="modal__button-ctn">
-						<Button
-							aria-label="restart the game"
-							className="modal__button modal__button-restart"
-							onClick={onRestart}
-						>
-							Restart
-						</Button>
+					{type === 'result' ? (
+						<div className="modal__button-ctn">
+							<Button
+								aria-label="restart the game"
+								className="modal__button modal__button-restart"
+								onClick={onRestart}
+							>
+								Restart
+							</Button>
 
-						<Button
-							aria-label="return homepage"
-							className="modal__button modal__button-home"
-							onClick={onRedirectHome}
-						>
-							Home
-						</Button>
-						<Button
-							aria-label="view stats"
-							className="modal__button modal__button-stats"
-							onClick={onRedirectStats}
-						>
-							View Stats
-						</Button>
-					</div>
+							<Button
+								aria-label="return homepage"
+								className="modal__button modal__button-home"
+								onClick={onRedirectHome}
+							>
+								Home
+							</Button>
+							<Button
+								aria-label="view stats"
+								className="modal__button modal__button-stats"
+								onClick={onRedirectStats}
+							>
+								View Stats
+							</Button>
+						</div>
+					) : (
+						<div className="modal__button-ctn">
+							<Button className="modal__button modal__button-reset" onClick={resetStats}>
+								Reset
+							</Button>
+							<Button className="modal__button modal__button-close" onClick={onClose}>
+								No
+							</Button>
+						</div>
+					)}
 				</div>
 			</div>
 		</FocusTrap>,

@@ -14,6 +14,7 @@ import Button from 'react-bootstrap/Button';
 import 'react-circular-progressbar/dist/styles.css';
 import CircularProgress from './CircularProgress';
 import { Helmet } from 'react-helmet';
+import Modal from "./Modal";
 
 const Stats = () => {
 	const [ playTimes, setPlayTimes ] = useState(playTimes$.value);
@@ -28,6 +29,7 @@ const Stats = () => {
 		updateCorrectNum(null);
 		updateInCorrectNum(null);
 		updateCorrectPercent(null);
+		setShowModal(false)
 	};
 
 	useEffect(() => {
@@ -48,6 +50,11 @@ const Stats = () => {
 
 		return () => subscriptions.forEach((x) => x.unsubscribe());
 	}, []);
+
+	const showWarning = () =>{
+		setShowModal(true)
+
+	}
 
 	return (
 		<main className="stats">
@@ -86,9 +93,10 @@ const Stats = () => {
 				</div>
 			</section>
 			<div className="stats__container-btn">
-				<Button className="stats__button stats__button-reset" onClick={resetStats}>
+				<Button className="stats__button stats__button-reset" onClick={showWarning}>
 					Reset
 				</Button>
+				{showModal && <Modal type="reset" showModal={showModal} resetStats={resetStats} onClose={()=>setShowModal(false)} />}
 				<Button className="stats__button stats__button-home" href="/">
 					Home
 				</Button>

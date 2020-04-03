@@ -43,12 +43,19 @@
 	}
 	&__headline {
 		display: flex;
-		> h5 {
+		 + h5 {
 			margin: 0 0 20px 0;
 			color: #fcfcfc;
 			&:focus {
 				outline: none;
 			}
+		}
+	}
+	&__text-warning{
+		color: #FF7575;
+		font-weight: 700;
+		&:focus{
+			outline: none;
 		}
 	}
 	&__button-ctn {
@@ -70,6 +77,14 @@
 		}
 		&-stats {
 			background-color: #b9f0bd;
+			border: 1px solid rgb(41, 41, 41);
+		}
+		&-reset {
+			background-color: #e79e9e;
+			border: 1px solid rgb(41, 41, 41);
+		}
+		&-close {
+			background-color: #a4edf5;
 			border: 1px solid rgb(41, 41, 41);
 		}
 

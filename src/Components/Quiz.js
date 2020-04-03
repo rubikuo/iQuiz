@@ -378,7 +378,7 @@ const Quiz = ({ location }) => {
 					</>}
                 {message!=="" && <p role="alert" aria-live="assertive" className="quiz__text-alert">{message}</p>}
 				{currentPage === lastPage && <Button aria-label="View result" className="quiz__button-result" onClick={checkedValue ?showResult : showMessage}>Result</Button>}
-				{showModal && <Modal showModal={showModal} onRedirectStats={onRedirectStats} point={point} onRedirectHome={onRedirectHome}
+				{showModal && <Modal showModal={showModal} type="result" onRedirectStats={onRedirectStats} point={point} onRedirectHome={onRedirectHome}
 					onRestart={onRestart} />}
 			</div>
 		</main>

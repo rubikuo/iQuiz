@@ -13,7 +13,7 @@
         }
     }
 
-    &__session{
+    &__section{
         width: 100%;
         @extend %flexRCC;
         flex-wrap: wrap;
@@ -21,7 +21,10 @@
 
         &-ctn{
             width: 130px;
-            margin: 3% 0;   
+            margin: 3% 0; 
+            &:focus{
+                outline: none;
+            }  
         }
 
         &--img{
@@ -33,6 +36,9 @@
             font-size: 2rem;
             margin: -5px 0 1px 0;
             padding: 0 10%;
+            &:focus{
+                outline: none;
+            }  
 
             &-sub{
                 font-size: 1.1rem;
@@ -51,6 +57,9 @@
         &--text{
             font-size: 2rem;
             margin: -5px 0 1px 0;
+            &:focus{
+                outline: none;
+            }  
          
             &-sub{
                 font-size: 1.1rem;

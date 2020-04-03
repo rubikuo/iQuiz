@@ -8,17 +8,20 @@ const CircularProgress = ({correctPercent}) =>{
 
     return (       
 					<CircularProgressbarWithChildren
+					    
                         role="progressbar"
                         styles ={buildStyles({pathColor:`rgb(77, 166, 255)`})}
                         aria-valuenow={correctPercent=== null? 0:correctPercent}
 						value={correctPercent=== null? 0:correctPercent}
 						className="stats__progress-icon"
+					
 					>
 						{/* <img className="stats__progress--img" src="https://i.imgur.com/b9NyUGm.png" alt="doge" /> */}
-						<p className="stats__progress--text" >
+						
+						<p className="stats__progress--text" 	tabIndex={0} aria-label="26 percent of correct rates" >
 							<strong>{ correctPercent=== null? 0:correctPercent}</strong> %
 						</p>
-						<p className="stats__progress--text-sub" >Correct Rate</p>
+						<p className="stats__progress--text-sub" 	 >Correct Rate</p>
 					</CircularProgressbarWithChildren>
 			
     )

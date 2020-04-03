@@ -56,8 +56,8 @@ const Stats = () => {
 			<Helmet>
 				<title>iQuiz-Stats</title>
 			</Helmet>
-			<section className="stats__session">
-				<div className="stats__session-wrap">
+			<section className="stats__section">
+				<div className="stats__section-wrap">
 					{statsType.map((type) => {
 							let progressValue = 
 							type==="Play Times"? playTimes === null ? 0 : playTimes:
@@ -65,11 +65,11 @@ const Stats = () => {
 							type ==="Incorrects"? inCorrectNum === null? 0: inCorrectNum:
 							correctPercent=== null? 0:correctPercent;
 						return (
-							<div key={type} className="stats__session-ctn">
-								<p className="stats__session--text">
+							<div key={type} className="stats__section-ctn" tabIndex={0}>
+								<p className="stats__section--text">
 									<strong>{progressValue}</strong> {type === 'correctRate' && <span>%</span>}
 								</p>
-								<p className="stats__session--text-sub">{type}</p>
+								<p className="stats__section--text-sub">{type}</p>
 							</div>
 						);
 					})}

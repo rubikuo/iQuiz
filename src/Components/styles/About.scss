@@ -1,8 +1,8 @@
 @import "./variables";
 .about {
 	height: 100%;
-    position: relative;
-    @extend %flexCCC;
+	position: relative;
+	@extend %flexCCC;
 	&__circle {
 		position: absolute;
 		z-index: -1;
@@ -18,98 +18,91 @@
 			rgba(255, 253, 146, 1) 62%,
 			rgba(255, 245, 141, 1) 94%
 		);
-	
-    }
-    &__article{
-        @extend %flexCCC;
-        width: 60%;
-        margin-left: 20%;
-        color: #fcfcfc;
-        font-size: 1.2rem;
-        font-weight: 700;
-        letter-spacing: 1px;
-        &:focus{
-            outline: none;
-        }
-        &--content {
-       
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        &--textDeco{
-            font-size: 1.7rem;
-        }
-        &--link{
-            color:#00FFFB;
-          
-        }
-    }
-   
+	}
+	&__article {
+		@extend %flexCCC;
+		width: 60%;
+		margin-left: 20%;
+		color: #fcfcfc;
+		font-size: 1.2rem;
+		font-weight: 700;
+		letter-spacing: 1px;
+		&:focus {
+			outline: none;
+		}
+		&--content {
+			font-size: 1.2rem;
+			font-weight: 700;
+			letter-spacing: 1px;
+		}
+		&--textDeco {
+			font-size: 1.7rem;
+		}
+		&--link {
+			color: #00fffb;
+		}
+	}
 }
 
 @media only screen and (max-width: 1000px) {
-    .about{
-        &__circle{
-            width: 150px;
-            height: 150px;
-            top: 0px;
-            left: 10px;
-        }
-        &__article{
-            margin-left: 0;
-            margin-top: 0%;
-            padding: 20px;
-            width: 100%;
-            font-size:1.1rem;
-            &--content{
-                font-size: 1.1rem;
-            }
-        }
-    }
-
+	.about {
+		&__circle {
+			width: 150px;
+			height: 150px;
+			top: 0px;
+			left: 10px;
+		}
+		&__article {
+			margin-left: 0;
+			margin-top: 0%;
+			padding: 20px;
+			width: 100%;
+			font-size: 1.1rem;
+			&--content {
+				font-size: 1.1rem;
+			}
+		}
+	}
 }
 
 @media only screen and (max-width: 800px) {
-    .about{
-        &__circle{
-            width: 110px;
-            height: 110px;
-            top: 0px;
-            left: 10px;
-        }
-        &__article{
-            margin-left: 0;
-            margin-top: 0;
-            padding: 20px;
-            width: 100%;
-            font-size:1rem;
-            &--content{
-                font-size: 1rem;
-            }
-        }
-    }
-
+	.about {
+		&__circle {
+			width: 110px;
+			height: 110px;
+			top: 0px;
+			left: 10px;
+		}
+		&__article {
+			margin-left: 0;
+			margin-top: 0;
+			padding: 20px;
+			width: 100%;
+			font-size: 1rem;
+			&--content {
+				font-size: 1rem;
+			}
+		}
+	}
 }
 
 @media only screen and (max-width: 600px) {
-    .about{
-        &__circle{
-            width: 110px;
-            height: 110px;
-            top: 0px;
-            left: 10px;
-        }
-        &__article{
-            margin-left: 0;
-            margin-top: 0%;
-            padding: 20px;
-            width: 100%;
-            font-size:1rem;
-            &--content{
-                font-size: 1rem;
-            }
-        }
-    }
-
+	.about {
+		&__circle {
+			width: 110px;
+			height: 110px;
+			top: 0px;
+			left: 10px;
+		}
+		&__article {
+			margin-left: 0;
+			margin-top: 0%;
+			padding: 20px;
+			width: 100%;
+			font-size: 1rem;
+			&--content {
+				font-size: 1rem;
+			}
+		}
+	}
 }

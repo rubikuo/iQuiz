@@ -31,7 +31,7 @@ const SidebarNav = ({ isOpen, onClose }) => {
                         </label>
                     )}
                     <aside className={asideClassName}>
-                        <img src={iQuizlogo} className="sidebar__icon-logo" role="image" alt="iQuiz Logo" aria-label="Welcome to iQuiz" tabIndex={0}/>
+                        <img src={iQuizlogo} className="sidebar__icon-logo" alt="iQuiz Logo" aria-label="Welcome to iQuiz" tabIndex={0}/>
                         <ul className="sidebar__menu">
                             <li className="sidebar__menu-item"><a href="/" aria-label="Go to home page" className="sidebar__menu-link"> Home</a> </li>
                             <li className="sidebar__menu-item"><a href="/stats" aria-label="Check stats" className="sidebar__menu-link"> Stats </a> </li>

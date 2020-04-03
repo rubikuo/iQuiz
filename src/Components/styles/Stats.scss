@@ -1,93 +1,86 @@
 @import "./variables";
 
-.stats{
-    color: white;
-    @extend %flexCCC;
-    &__title{
-        color: grey;
-    }
-    &__info{
-        &-playtimes{
-            color: rgb(0, 255, 251);
+.stats {
+	color: white;
+	@extend %flexCCC;
+	&__title {
+		color: grey;
+	}
+	&__info {
+		&-playtimes {
+			color: rgb(0, 255, 251);
+		}
+	}
 
-        }
-    }
+	&__section {
+		width: 100%;
+		@extend %flexRCC;
+		flex-wrap: wrap;
+		padding: 5% 0;
 
-    &__section{
-        width: 100%;
-        @extend %flexRCC;
-        flex-wrap: wrap;
-        padding: 5% 0;
+		&-ctn {
+			width: 130px;
+			margin: 3% 0;
+			&:focus {
+				outline: none;
+			}
+		}
 
-        &-ctn{
-            width: 130px;
-            margin: 3% 0; 
-            &:focus{
-                outline: none;
-            }  
-        }
+		&--img {
+			width: 40%;
+			margin-top: -5px;
+		}
+		&--text {
+			font-size: 2rem;
+			margin: -5px 0 1px 0;
+			padding: 0 10%;
+			&:focus {
+				outline: none;
+			}
 
-        &--img{
-            width: 40%;
-            margin-top: -5px;
+			&-sub {
+				font-size: 1.1rem;
+				color: white;
+				padding: 0 10%;
+				@extend %font-SW7;
+			}
+		}
+	}
+	&__progress {
+		width: 200px;
+		margin: 3% 0;
 
-        }
-        &--text{
-            font-size: 2rem;
-            margin: -5px 0 1px 0;
-            padding: 0 10%;
-            &:focus{
-                outline: none;
-            }  
+		&--text {
+			font-size: 2rem;
+			margin: -5px 0 1px 0;
+			&:focus {
+				outline: none;
+			}
 
-            &-sub{
-                font-size: 1.1rem;
-                color:  white;
-                padding: 0 10%;
-                @extend %font-SW7;
-            }
+			&-sub {
+				font-size: 1.1rem;
+				color: white;
+				@extend %font-SW7;
+			}
+		}
+	}
+	&__container-btn {
+		width: 100%;
+		@extend %flexJC;
+		margin-top: 0%;
+	}
 
-        }
-
-    }
-    &__progress{
-        width: 200px;
-        margin: 3% 0;
-     
-        &--text{
-            font-size: 2rem;
-            margin: -5px 0 1px 0;
-            &:focus{
-                outline: none;
-            }  
-         
-            &-sub{
-                font-size: 1.1rem;
-                color:  white;
-                @extend %font-SW7;
-            }
-
-        }
-
-    }
-    &__container-btn{
-        width: 100%;
-        @extend %flexJC;
-        margin-top: 0%;
-    }
-    
-    &__button{
-        @extend %btn;
+	&__button {
+		@extend %btn;
 		margin-top: 3%;
-        border: 1px solid rgb(41, 41, 41);
-        &-home{
-            background-color: #e5e79e;
-            border: 1px solid rgb(41, 41, 41);
-        }
-        &-reset{
-            background-color: #e79e9e;
-            border: 1px solid rgb(41, 41, 41);
-        }
-        
-    }
+		border: 1px solid rgb(41, 41, 41);
+		&-home {
+			background-color: #e5e79e;
+			border: 1px solid rgb(41, 41, 41);
+		}
+		&-reset {
+			background-color: #e79e9e;
+			border: 1px solid rgb(41, 41, 41);
+		}
+	}
 }

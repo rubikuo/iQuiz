@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import './styles/Modal.scss';
 import Button from 'react-bootstrap/Button';
 
-const Modal = ({ onRedirectHome, onRedirectStats, onRestart, point, showModal}) => {
+const Modal = ({ onRedirectHome, onRedirectStats, onRestart, point, showModal }) => {
 	let message;
 	if (point === 0) {
 		message = 'Ooops..';
@@ -29,23 +29,39 @@ const Modal = ({ onRedirectHome, onRedirectStats, onRestart, point, showModal}) 
 						aria-hidden={!showModal}
 						className="modal__headline"
 					>
-						<h5 tabIndex={0} id="dialogTitle"> {message} </h5>
+						<h5 tabIndex={0} id="dialogTitle">
+							{' '}
+							{message}{' '}
+						</h5>
 					</div>
 
-					<p id="dialogDesc">You have <span>{point}</span> / 10 questions correct!</p>
+					<p id="dialogDesc">
+						You have <span>{point}</span> / 10 questions correct!
+					</p>
 
 					<div className="modal__button-ctn">
-						<Button aria-label="restart the game" className="modal__button modal__button-restart" onClick={onRestart}>
+						<Button
+							aria-label="restart the game"
+							className="modal__button modal__button-restart"
+							onClick={onRestart}
+						>
 							Restart
 						</Button>
 
-						<Button aria-label="return homepage" className="modal__button modal__button-home" onClick={onRedirectHome}>
+						<Button
+							aria-label="return homepage"
+							className="modal__button modal__button-home"
+							onClick={onRedirectHome}
+						>
 							Home
 						</Button>
-						<Button aria-label="view stats" className="modal__button modal__button-stats" onClick={onRedirectStats}>
+						<Button
+							aria-label="view stats"
+							className="modal__button modal__button-stats"
+							onClick={onRedirectStats}
+						>
 							View Stats
 						</Button>
-            
 					</div>
 				</div>
 			</div>

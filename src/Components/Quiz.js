@@ -31,7 +31,6 @@ const Quiz = ({ location }) => {
 
 
 	let catagoryNum = location.state.catagory.catagoryNum;
-	// console.log(catagoryNum)
 	let catagoryType = location.state.catagory.type;
 
 	//****** connect to localstorage once it's loaded ********//
@@ -78,8 +77,6 @@ const Quiz = ({ location }) => {
 
 	}, [focusTime])
 
-
-   
 	 
 	const firstAnswerRef = useRef(null);
 	let focusFirstAnswer = () =>{
@@ -95,8 +92,6 @@ const Quiz = ({ location }) => {
 		}, 3000)
 	}, [])
    
-
-
 
 
 

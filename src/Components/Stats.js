@@ -21,7 +21,7 @@ const Stats = () => {
 	const [ inCorrectNum, setInCorrectNum ] = useState(inCorrectNum$.value);
 	const [ correctPercent, setCorrectPercent ] = useState(correctPercent$.value);
 	const [ statsType ] = useState([ 'Play Times', 'Corrects', 'Incorrects' ]);
-	const [showModal, setShowModal] = useState(false)
+	const [ showModal, setShowModal ] = useState(false);
 
 	const resetStats = () => {
 		updatePlayTimes(null); //confirm with Andreas why i need to render the page again to see the updated number?
@@ -49,8 +49,6 @@ const Stats = () => {
 		return () => subscriptions.forEach((x) => x.unsubscribe());
 	}, []);
 
-
-
 	return (
 		<main className="stats">
 			<Helmet>
@@ -59,11 +57,14 @@ const Stats = () => {
 			<section className="stats__section">
 				<div className="stats__section-wrap">
 					{statsType.map((type) => {
-							let progressValue = 
-							type==="Play Times"? playTimes === null ? 0 : playTimes:
-							type ==="Corrects"? correctNum ===null? 0: correctNum:
-							type ==="Incorrects"? inCorrectNum === null? 0: inCorrectNum:
-							correctPercent=== null? 0:correctPercent;
+						let progressValue =
+							type === 'Play Times'
+								? playTimes === null ? 0 : playTimes
+								: type === 'Corrects'
+									? correctNum === null ? 0 : correctNum
+									: type === 'Incorrects'
+										? inCorrectNum === null ? 0 : inCorrectNum
+										: correctPercent === null ? 0 : correctPercent;
 						return (
 							<div key={type} className="stats__section-ctn" tabIndex={0}>
 								<p className="stats__section--text">
@@ -85,10 +86,12 @@ const Stats = () => {
 				</div>
 			</section>
 			<div className="stats__container-btn">
-			<Button className="stats__button stats__button-reset" onClick={resetStats}>
-				Reset
-			</Button>
-			<Button  className="stats__button stats__button-home" href="/">Home</Button>
+				<Button className="stats__button stats__button-reset" onClick={resetStats}>
+					Reset
+				</Button>
+				<Button className="stats__button stats__button-home" href="/">
+					Home
+				</Button>
 			</div>
 		</main>
 	);

@@ -1,8 +1,9 @@
+/**** define often used css ***/
+
 %flexJC {
 	display: flex;
 	justify-content: center;
 }
-
 
 %flexCCC {
 	@extend %flexJC;

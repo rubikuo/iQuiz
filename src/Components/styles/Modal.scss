@@ -11,8 +11,8 @@
 	top: 0;
 	z-index: 9999999999999;
 	font-family: 'Comic Neue', cursive;
-    letter-spacing: 1px;
-    &:focus-within {
+	letter-spacing: 1px;
+	&:focus-within {
 		box-shadow: inset 0px 0px 0px 4px cyan;
 	}
 	&__box {
@@ -43,19 +43,15 @@
 	}
 	&__headline {
 		display: flex;
-		 + h5 {
-			margin: 0 0 20px 0;
-			color: #fcfcfc;
+	}
+	&__text {
+		color: #ffffff;
+		&-warning {
+			color: #ff7575;
+			font-weight: 700;
 			&:focus {
 				outline: none;
 			}
-		}
-	}
-	&__text-warning{
-		color: #FF7575;
-		font-weight: 700;
-		&:focus{
-			outline: none;
 		}
 	}
 	&__button-ctn {

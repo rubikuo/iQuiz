@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
 	playTimes$,
 	updatePlayTimes,
@@ -24,13 +24,25 @@ const Stats = () => {
 	const [ statsType ] = useState([ 'Play Times', 'Corrects', 'Incorrects' ]);
 	const [ showModal, setShowModal ] = useState(false);
 
+	const showWarning = (e) =>{
+		setShowModal(true)
+        e.target.blur();
+
+	}
+	
 	const resetStats = () => {
 		updatePlayTimes(null); //confirm with Andreas why i need to render the page again to see the updated number?
 		updateCorrectNum(null);
 		updateInCorrectNum(null);
 		updateCorrectPercent(null);
 		setShowModal(false)
+		focusOnHome();
 	};
+
+	const closeModal = () =>{
+		setShowModal(false);
+		focusOnHome();
+	}
 
 	useEffect(() => {
 		const subscriptions = [
@@ -51,10 +63,16 @@ const Stats = () => {
 		return () => subscriptions.forEach((x) => x.unsubscribe());
 	}, []);
 
-	const showWarning = () =>{
-		setShowModal(true)
-
+	const homeRef = useRef();
+	
+	const focusOnHome = () =>{
+		homeRef.current.focus();
 	}
+
+
+
+
+	
 
 	return (
 		<main className="stats">
@@ -93,11 +111,12 @@ const Stats = () => {
 				</div>
 			</section>
 			<div className="stats__container-btn">
-				<Button className="stats__button stats__button-reset" onClick={showWarning}>
+			
+				<Button className="stats__button stats__button-reset" aria-label="reset stats"  onClick={showWarning}>
 					Reset
 				</Button>
-				{showModal && <Modal type="reset" showModal={showModal} resetStats={resetStats} onClose={()=>setShowModal(false)} />}
-				<Button className="stats__button stats__button-home" href="/">
+				{showModal && <Modal type="reset" showModal={showModal} resetStats={resetStats}   onClose={closeModal} />}
+				<Button className="stats__button stats__button-home" ref={homeRef} role="button" aria-label="return to home page" tabIndex={0} href="/">
 					Home
 				</Button>
 			</div>

@@ -21,9 +21,9 @@
 		&-ctn {
 			width: 130px;
 			margin: 3% 0;
-			&:focus {
-				outline: none;
-			}
+			// &:focus {
+			// 	outline: none;
+			// }
 		}
 
 		&--img {
@@ -77,10 +77,14 @@
 		&-home {
 			background-color: #e5e79e;
 			border: 1px solid rgb(41, 41, 41);
+			
 		}
 		&-reset {
 			background-color: #e79e9e;
 			border: 1px solid rgb(41, 41, 41);
+		}
+		&:focus{
+			box-shadow: 0px 0px 3px 3px white;
 		}
 	}
 }

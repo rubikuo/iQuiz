@@ -310,7 +310,7 @@ const Quiz = ({ location }) => {
 			</figure>
 			<div className="quiz__container">
 				{loading ? (
-					<TouchBallLoading role="alert" aria-busy="true" style={{ height: "18rem" }} />
+					<TouchBallLoading role="alert" aria-busy="true" aria-label="Loading"style={{ height: "18rem" }} />
 
 				) : (
 						currentDatas.map((data, index) => {

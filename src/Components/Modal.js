@@ -29,9 +29,16 @@ const Modal = ({ onRedirectHome, onRedirectStats, onRestart, point, showModal, t
 						aria-hidden={!showModal}
 						className="modal__headline"
 					>
-						
-					{type === 'result' ?<h5 tabIndex={0} id="dialogTitle"> message	</h5> : <h5 tabIndex={0} id="dialogTitle" className="modal__text-warning">Warning</h5>}
-					
+						{type === 'result' ? (
+							<h5 tabIndex={0} id="dialogTitle" className="modal__text">
+								{' '}
+								{message}
+							</h5>
+						) : (
+							<h5 tabIndex={0} id="dialogTitle" className="modal__text-warning">
+								Warning
+							</h5>
+						)}
 					</div>
 
 					{type === 'result' ? (

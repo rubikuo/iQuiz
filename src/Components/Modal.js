@@ -46,7 +46,7 @@ const Modal = ({ onRedirectHome, onRedirectStats, onRestart, point, showModal, t
 							You have <span>{point}</span> / 10 questions correct!
 						</p>
 					) : (
-						<p id="dialogDesc">Are you sure to reset stats to 0?</p>
+						<p id="dialogDesc">Are you sure to reset stats to zero?</p>
 					)}
 
 					{type === 'result' ? (

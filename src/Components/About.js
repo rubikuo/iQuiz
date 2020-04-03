@@ -9,7 +9,8 @@ const About = () => {
 				<title>About iQuiz</title>
 			</Helmet>
 			<div className="about__circle" />
-			<article className="about__article">
+		
+			<article  className="about__article"  tabIndex={0}>
 				<p className="about__article--content">
 					<span className="about__article--textDeco">iQuiz</span> is created with ReactJS and developed based
 					on Open Triva DB API. Application is built on UX concepts and is implemented with WAI-ARIA for

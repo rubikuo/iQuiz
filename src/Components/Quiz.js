@@ -333,7 +333,7 @@ const Quiz = ({ location }) => {
 									<h3 className="quiz__text-question" ref={questionRef} tabIndex={0}>
 										{currentPage + "."} {data.question.replace(/&#?\w+;/g, (match) => entities[match])}
 									</h3>
-
+                                     <div className="quiz__option-ctn"> 
 									{data.options.map((opt, i) => {
 				
 										return (
@@ -360,13 +360,7 @@ const Quiz = ({ location }) => {
 
 										);
 									})}
-								</section>
-
-							);
-						})
-					)}
-
-				{loading ? null :
+										{loading ? null :
 					<>
 						{currentPage === lastPage ? null :
 							<button aria-label="Next" onClick={checkedValue ? toNext : showMessage} className="quiz__button quiz__button-next"> <MdNavigateNext className="quiz__button-next--fake" /> </button>
@@ -377,6 +371,14 @@ const Quiz = ({ location }) => {
 
 
 					</>}
+									</div>
+								</section>
+
+							);
+						})
+					)}
+
+			
                 {message!=="" && <p role="alert" aria-live="assertive" className="quiz__text-alert">{message}</p>}
 				{currentPage === lastPage && <Button aria-label="View result" className="quiz__button-result" onClick={checkedValue ?showResult : showMessage}>Result</Button>}
 				{showModal && <Modal showModal={showModal} type="result" onRedirectStats={onRedirectStats} point={point} onRedirectHome={onRedirectHome}

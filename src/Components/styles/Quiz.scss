@@ -12,7 +12,6 @@
 		@extend %flexJC;
 		padding-bottom: 2%;
 
-		
 		&:focus {
 			outline: none;
 		}
@@ -27,6 +26,7 @@
 	&__button {
 		position: absolute;
 		top: 50%;
+		transform: translateY(-50%);
 		background-color: transparent;
 		border: none;
 		padding: 0;
@@ -85,10 +85,14 @@
 		font-size: 1.3rem;
 		font-weight: bold;
 		letter-spacing: 1px;
-		&:focus{
+		&:focus {
 			outline: none;
 		}
-		
+	}
+	&__option-ctn{
+		width: 100%;
+		@extend %flexCCC;
+		position: relative;
 	}
 	&__radiobtn {
 		width: 60%;
@@ -192,7 +196,6 @@
 			margin-left: 20px;
 			width: 80%;
 			font-size: 1.2rem;
-		
 		}
 	}
 	&__text-alert {
@@ -203,3 +206,58 @@
 	}
 }
 
+
+@media only screen and (max-width: 800px){
+	.quiz {
+		&__icon-catagory {
+			margin: 0;
+		}
+
+		&__button {
+			&-next {
+				right: 3%;
+				&--fake {
+					font-size: 55px;
+				}
+			}
+			&-prev {
+				left: 3%;
+				&--fake {
+					font-size: 55px;
+				}
+			}
+		}
+		&__container {
+			justify-content: start;
+			padding-top: 5%;
+		}
+		&__text-question {
+			font-size: 1.2rem;
+		}
+		&__radiobtn {
+			&-option {
+				font-size: 1rem;
+			}
+		}
+	}
+
+}
+
+@media only screen and (max-width: 375px) and(max-height: 667px) {
+	.quiz {
+		
+		&__button {
+			&-next {
+				&--fake {
+					font-size: 45px;
+				}
+			}
+			&-prev {
+				left: 3%;
+				&--fake {
+					font-size: 45px;
+				}
+			}
+		}
+	}
+}

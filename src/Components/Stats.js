@@ -32,7 +32,7 @@ const Stats = () => {
 	}
 	
 	const resetStats = () => {
-		updatePlayTimes(null); //confirm with Andreas why i need to render the page again to see the updated number?
+		updatePlayTimes(null); 
 		updateCorrectNum(null);
 		updateInCorrectNum(null);
 		updateCorrectPercent(null);

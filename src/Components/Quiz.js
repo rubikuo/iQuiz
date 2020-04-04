@@ -197,24 +197,28 @@ const Quiz = ({ location }) => {
 	console.log("answers", answers)
 
 
-	const promise = ()=>{
-		return new Promise((resolve)=>{
-            setTimeout(()=>{
-				resolve(focusFirstAnswer())
-			}, 2500)
-
-		})
-
-	}
+	// const promise = ()=>{
+	// 	return new Promise((resolve)=>{
+    //         setTimeout(()=>{
+	// 			resolve(focusFirstAnswer())
+	// 		}, 2500)
+	// 	})
+	// }
 	
    // control focus to target back onto the first item of answer after showing message //
-    const showMessage =()=>{
-		setMessage("Please choose answer")
-		promise()
-		.then(()=>{
-			setMessage("")
-		})	
+	const showMessage = () =>{
+		setMessage("Please choose answer");
+		focusFirstAnswer()
+		
 	}
+ 
+//    const showMessage =()=>{
+// 		setMessage("Please choose answer")
+// 		promise()
+// 		.then(()=>{
+// 			setMessage("")
+// 		})	
+// 	}
 	
 	const showResult = () => {
 		let copyAnswers = [...answers];
@@ -252,8 +256,6 @@ const Quiz = ({ location }) => {
 		setCheckedValue(answers[currentPage - 2])
 	}
 
-
-	// console.log("playTime", playTimes)
 
 	//********** */ eventlistener's functions for buttons on Modal **********//
 
@@ -333,7 +335,6 @@ const Quiz = ({ location }) => {
 									</h3>
 
 									{data.options.map((opt, i) => {
-											/***label style */
 				
 										return (
                                            

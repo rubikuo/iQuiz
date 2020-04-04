@@ -83,9 +83,12 @@
 		text-align: left;
 		font-size: 1.4rem;
 		@extend %font-SW7;
-		// &:focus {
-		// 	outline: none;
-		// }
+		&:focus{
+			outline: none;
+		}
+		&:focus{
+			outline: none;
+		}
 	}
 	&__radiobtn {
 		width: 60%;
@@ -128,7 +131,7 @@
 			&:focus {
 				+ span.quiz__radiobtn--fake {
 					&::before {
-						// background-color: rgba(0, 251, 255, 0.44);
+						background-color: rgba(0, 251, 255, 0.44);
 						opacity: 1;
 					}
 				}
@@ -205,37 +208,3 @@
 	}
 }
 
-@media only screen and (max-width: 375px) {
-	.quiz {
-		&__icon-catagory {
-			margin-top: -10px;
-			margin: 0;
-			padding: 0;
-		}
-		&__img {
-			width: 60px;
-		}
-		&__button {
-			&-next,
-			&-prev {
-				&--fake {
-					font-size: 40px;
-				}
-			}
-		}
-		&__radiobtn {
-			width: 60%;
-			&-option {
-				font-size: 0.8rem;
-				letter-spacing: 0;
-			}
-		}
-
-		&__container {
-			height: 70%;
-		}
-		&__text-question {
-			font-size: 1rem;
-		}
-	}
-}

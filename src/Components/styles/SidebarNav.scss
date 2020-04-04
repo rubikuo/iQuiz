@@ -39,10 +39,16 @@
 		transform: translate(-200px);
 		visibility: hidden;
 	}
-	&__icon-logo {
+	&__icon-ctn{
 		width: 100%;
 		height: 20%;
+		@extend %flexRCC;
 		background-color: #0c0c43;
+	}
+	&__icon-logo {
+		width: 80%;
+		height: 50%;
+	
 		&:focus {
 			outline: none;
 		}

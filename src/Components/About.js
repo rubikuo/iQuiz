@@ -1,7 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import './styles/About.scss';
-// import Logo from "../Logo";
 import iQuizlogo from '../materials/iQuiz-Logo.svg';
 
 const About = () => {
@@ -32,21 +31,21 @@ const About = () => {
 					Icon made by{' '}
 					<a className="about__article--link" href="https://www.flaticon.com/authors/freepik">
 						Freepik
-					</a>{' '}
-					from{' '}
+					</a>
+					from
 					<a className="about__article--link" href="www.flaticon.com">
-						{' '}
+				
 						www.flaticon.com
-					</a>{' '}
+					</a>
 					<br />
-					Icon made by{' '}
+					Icon made by
 					<a className="about__article--link" href="https://www.flaticon.com/authors/smashicons">
-						{' '}
+					
 						Smashicons
-					</a>{' '}
-					from{' '}
+					</a>
+					from
 					<a className="about__article--link" href="www.flaticon.com">
-						{' '}
+					
 						www.flaticon.com
 					</a>
 				</p>

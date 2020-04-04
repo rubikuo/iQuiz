@@ -304,7 +304,7 @@ const Quiz = ({ location }) => {
 				<BookIcon size={85} className="quiz__img" />
 			) : catagoryType === 'Music' ? (
 				<MusicIcon size={85} className="quiz__img" />
-			) : catagoryType === 'Video games' ? (
+			) : catagoryType === 'Video Games' ? (
 				<GameIcon size={85} className="quiz__img" />
 			) : (
 							<MovieIcon size={85} className="quiz__img" />

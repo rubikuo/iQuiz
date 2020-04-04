@@ -31,22 +31,21 @@ const About = () => {
 					Icon made by{' '}
 					<a className="about__article--link" href="https://www.flaticon.com/authors/freepik">
 						Freepik
-					</a>
-					from
+					</a>{' '}
+					from {' '}
 					<a className="about__article--link" href="www.flaticon.com">
 				
 						www.flaticon.com
-					</a>
+					</a>{' '}
 					<br />
-					Icon made by
+					Icon made by  {' '}
 					<a className="about__article--link" href="https://www.flaticon.com/authors/smashicons">
+					Smashicons
+					</a>{' '}
+					from {' '}
+					 <a className="about__article--link" href="www.flaticon.com">
 					
-						Smashicons
-					</a>
-					from
-					<a className="about__article--link" href="www.flaticon.com">
-					
-						www.flaticon.com
+					www.flaticon.com
 					</a>
 				</p>
 			</article>

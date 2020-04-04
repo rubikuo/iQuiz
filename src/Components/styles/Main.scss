@@ -5,7 +5,7 @@
 	@extend %flexCCC;
 
 	&__radiobtn-group {
-		padding: 20px;
+		padding: 5%;
 		width: 100%;
 		@extend %flexRCC;
 		flex-wrap: wrap;
@@ -32,10 +32,7 @@
 			left: 50%;
 			&:checked {
 				+ div.main__radiobtn--fake {
-					> .main__img {
-						-webkit-filter: drop-shadow(0px 0px 8px rgb(69, 254, 251));
-						filter: drop-shadow(0px 0px 8px rgb(3, 255, 251));
-					}
+					box-shadow: 0px 0px 5px 5px rgb(0, 251, 255);
 				}
 				~ p.main__radiobtn-option {
 					color: rgb(3, 255, 251);
@@ -43,10 +40,7 @@
 			}
 			&:focus {
 				+ div.main__radiobtn--fake {
-					> .main__img {
-						-webkit-filter: drop-shadow(0px 0px 8px rgb(69, 254, 251));
-						filter: drop-shadow(0px 0px 8px rgb(3, 255, 251));
-					}
+					box-shadow: 0px 0px 5px 5px rgb(0, 251, 255);
 				}
 				~ p.main__radiobtn-option {
 					color: rgb(3, 255, 251);
@@ -54,10 +48,7 @@
 			}
 			&:hover {
 				+ div.main__radiobtn--fake {
-					> .main__img {
-						-webkit-filter: drop-shadow(0px 0px 8px rgb(3, 255, 251));
-						filter: drop-shadow(0px 0px 8px rgb(3, 255, 251));
-					}
+					box-shadow: 0px 0px 3px 3px rgb(0, 251, 255);
 				}
 				~ p.main__radiobtn-option {
 					color: rgb(3, 255, 251);
@@ -65,10 +56,7 @@
 			}
 			&:active {
 				+ div.main__radiobtn--fake {
-					> .main__img {
-						-webkit-filter: drop-shadow(0px 0px 8px rgb(3, 255, 251));
-						filter: drop-shadow(0px 0px 8px rgb(3, 255, 251));
-					}
+					box-shadow: 0px 0px 5px 5px rgb(0, 251, 255);
 				}
 				~ p.main__radiobtn-option {
 					color: rgb(3, 255, 251);
@@ -76,26 +64,28 @@
 			}
 		}
 		&--fake {
-			&::after {
-				content: "";
-				display: block;
-				width: 10px;
-				height: 10px;
-				background: #00000089;
-				border-radius: 50%;
-				position: absolute;
-				box-shadow: 0px 0px 1px rgb(101, 100, 100);
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, 50%);
-				opacity: 0;
-				transition: all .3s ease;
-			}
+			border-radius: 50%;
+			width: 120px;
+			height: 120px;
+			background-color: rgba(227, 215, 250, 0.888);
+			position: relative;
 		}
 		&-option {
 			padding-top: 10px;
-			font-size: 1.2rem;
-			font-weight: 700;
+			font-size: 1.3rem;
+			font-weight: 600;
+		}
+	}
+	&__img {
+		position: absolute;
+		width: 60%;
+		height: 60%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		&-movie {
+			width: 55%;
+			height: 55%;
 		}
 	}
 	&__text-alert {
@@ -109,5 +99,46 @@
 		margin-top: 3%;
 		background-color: #a09ddc;
 		border: 1px solid rgb(41, 41, 41);
+	}
+}
+
+@media only screen and (max-width: 770px) {
+	.main {
+		&__radiobtn-group {
+			padding: 0;
+			width: 100%;
+		}
+		&__radiobtn {
+			margin: 1% 5%;
+			&--fake {
+				width: 120px;
+				height: 120px;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 580px) {
+	.main {
+		&__radiobtn {
+			margin: 3% 6%;
+			&-option {
+				font-size: 1rem;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	.main {
+		&__radiobtn-group {
+			padding: 5% 0;
+		}
+		&__radiobtn {
+			&--fake {
+				width: 100px;
+				height: 100px;
+			}
+		}
 	}
 }

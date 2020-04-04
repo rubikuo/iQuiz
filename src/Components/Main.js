@@ -2,14 +2,17 @@ import React, { useState} from 'react';
 import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 import './styles/Main.scss';
-import { BookIcon, MusicIcon, GameIcon, MovieIcon } from './ImgIcon.jsx';
 import Button from 'react-bootstrap/Button';
+import book from "../materials/book.svg";
+import movie from "../materials/movie.svg";
+import videoGame from "../materials/videoGame.svg";
+import music from "../materials/music.svg";
 
 const Main = () => {
 	const [ catagories ] = useState([
 		{ type: 'Books', id: 1, catagoryNum: 10 },
 		{ type: 'Music', id: 2, catagoryNum: 12 },
-		{ type: 'Video games', id: 3, catagoryNum: 15 },
+		{ type: 'Video Games', id: 3, catagoryNum: 15 },
 		{ type: 'Film', id: 4, catagoryNum: 11 }
 	]);
 
@@ -66,15 +69,16 @@ const Main = () => {
 								onChange={() => chooseCat(cat)}
 								checked={cat === cat.catagoryNum}
 							/>
-							<div className="main__radiobtn--fake">
+								<div className="main__radiobtn--fake">
 								{cat.type === 'Books' ? (
-									<BookIcon size={130}  	aria-labelledby={cat.type} 	className="main__img" />
+									<img  className="main__img" src={book} alt="book catagory"/>
 								) : cat.type === 'Music' ? (
-									<MusicIcon size={130} 	aria-labelledby={cat.type} className="main__img" />
-								) : cat.type === 'Video games' ? (
-									<GameIcon size={130}  	aria-labelledby={cat.type} className="main__img" />
+									<img  className=" main__img main__img-movie" src={music} alt="music catagory"/>
+								
+								) : cat.type === 'Video Games' ? (
+									<img  className=" main__img main__img-movie" src={videoGame} alt="video game catagory"/>
 								) : (
-									<MovieIcon size={130} 	aria-labelledby={cat.type} className="main__img" />
+										<img  className=" main__img main__img-movie" src={movie} alt="movie catagory"/>
 								)}
 							</div>
 
